@@ -14,7 +14,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   --bg:#fff;--bg2:#F5F4F1;--bg3:#ECEAE5;
   --text:#1a1a1a;--text2:#7a7570;--text3:#b0ada8;
   --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
-  --accent:#1d4ed8;--accent-bg:rgba(29,78,216,0.07);--accent-bg2:rgba(29,78,216,0.14);
+  --accent:#1d4ed8;--accent-bg:rgba(29,78,216,0.07);
   --green:#16a34a;--green-bg:rgba(22,163,74,0.08);
   --red:#dc2626;--red-bg:rgba(220,38,38,0.08);
   --amber:#b45309;--amber-bg:rgba(180,83,9,0.08);
@@ -22,16 +22,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 }
 #app{max-width:480px;margin:0 auto;background:var(--bg2);min-height:100vh;}
 .screen{display:none}.screen.active{display:block}
-
-/* TOPBAR */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:10;}
 .topbar-logo{display:flex;align-items:center;gap:10px;}
-.topbar-icon{width:32px;height:32px;background:#1a1a1a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;letter-spacing:.3px;flex-shrink:0;}
+.topbar-icon{width:32px;height:32px;background:#1a1a1a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
 .topbar-title{font-size:15px;font-weight:600;letter-spacing:-.3px;}
 .topbar-sub{font-size:11px;color:var(--text2);margin-top:1px;}
 .topbar-right{display:flex;align-items:center;gap:8px;}
-
-/* STATUS PILL */
 .status-pill{display:flex;align-items:center;gap:5px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:20px;padding:5px 10px;}
 .sdot{width:6px;height:6px;border-radius:50%;background:var(--text3);}
 .sdot.ok{background:var(--green);}
@@ -39,35 +35,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sdot.error{background:var(--red);}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
 .stext{font-size:10px;color:var(--text2);letter-spacing:.4px;}
-
-/* NAV TABS */
 .nav{display:flex;background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 8px;}
 .nav-tab{flex:1;padding:12px 4px;font-size:11px;letter-spacing:.7px;background:none;border:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;font-family:inherit;}
 .nav-tab.active{color:var(--text);border-bottom-color:var(--text);}
-
-/* CONTENT */
 .content{padding:16px;}
-
-/* BUTTONS */
 .btn-primary{width:100%;padding:14px;font-size:14px;font-weight:600;background:#1a1a1a;color:#fff;border:none;border-radius:var(--rl);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-.2px;}
 .btn-primary:hover{background:#2d2d2d;transform:scale(.99);}
 .btn-primary:disabled{background:var(--text3);cursor:not-allowed;transform:none;}
 .btn-secondary{width:100%;padding:12px;font-size:13px;font-weight:500;background:var(--bg2);color:var(--text);border:0.5px solid var(--border2);border-radius:var(--r);cursor:pointer;transition:all .18s;font-family:inherit;}
-.btn-secondary:hover{background:var(--bg3);}
-
-/* PROGRESS */
 .progress-track{height:2px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:12px;display:none;}
 .progress-track.active{display:block;}
 .progress-fill{height:100%;background:var(--accent);animation:prog 2.5s infinite;}
 @keyframes prog{0%{width:0;margin-left:0}50%{width:55%}100%{width:0;margin-left:100%}}
-.loading-msg{font-size:11px;color:var(--accent);margin-bottom:14px;display:none;font-variant-numeric:tabular-nums;}
+.loading-msg{font-size:11px;color:var(--accent);margin-bottom:14px;display:none;}
 .loading-msg.active{display:block;}
-
-/* CARDS */
-.card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:10px;overflow:hidden;}
-.card-body{padding:14px 16px;}
-
-/* STOCK CARD */
 .stock-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:10px;overflow:hidden;position:relative;}
 .stock-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--text3);}
 .stock-card.r1::before{background:var(--accent);}
@@ -91,19 +72,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .score-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
 .score-lbl{font-size:10px;color:var(--text2);width:82px;flex-shrink:0;}
 .score-track{flex:1;height:2px;background:var(--bg3);border-radius:2px;overflow:hidden;}
-.score-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .8s ease;}
+.score-fill{height:100%;background:var(--accent);border-radius:2px;}
 .score-val{font-size:10px;color:var(--text);width:26px;text-align:right;}
 .rationale{font-size:11px;color:var(--text2);line-height:1.7;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border);}
-.rationale-title{font-size:10px;color:var(--text);font-weight:600;display:block;margin-bottom:3px;letter-spacing:.2px;}
-
-/* MARKET CONTEXT */
+.rationale-title{font-size:10px;color:var(--text);font-weight:600;display:block;margin-bottom:3px;}
 .mkt-ctx{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--rl);padding:12px 14px;margin-bottom:14px;font-size:12px;color:var(--text2);line-height:1.75;}
-.sentiment-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:5px;margin-right:6px;letter-spacing:.3px;}
+.sentiment-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:5px;margin-right:6px;}
 .bull{background:var(--green-bg);color:var(--green);}
 .bear{background:var(--red-bg);color:var(--red);}
 .mix{background:var(--amber-bg);color:var(--amber);}
-
-/* ALERTS */
 .alert-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:10px;overflow:hidden;position:relative;}
 .alert-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
 .alert-card.critical::before{background:var(--red);}
@@ -115,104 +92,75 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .critical .alert-level{background:var(--red-bg);color:var(--red);}
 .warning .alert-level{background:var(--amber-bg);color:var(--amber);}
 .info .alert-level{background:var(--accent-bg);color:var(--accent);}
-.alert-title{font-size:13px;font-weight:600;color:var(--text);flex:1;}
+.alert-title-txt{font-size:13px;font-weight:600;color:var(--text);flex:1;}
 .alert-date{font-size:10px;color:var(--text2);}
 .alert-desc{font-size:11px;color:var(--text2);line-height:1.7;}
 .alert-impact{font-size:10px;color:var(--text2);margin-top:5px;}
-
-/* REPORT */
-.report-box{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--rl);padding:14px;font-size:11px;color:var(--text2);line-height:1.9;white-space:pre-wrap;word-break:break-word;max-height:400px;overflow-y:auto;margin-bottom:10px;font-family:'Courier New',monospace;}
-
-/* SECTION LABEL */
+.report-box{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--rl);padding:14px;font-size:11px;color:var(--text2);line-height:1.9;white-space:pre-wrap;word-break:break-word;max-height:400px;overflow-y:auto;margin-bottom:10px;font-family:monospace;}
 .section-label{font-size:10px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;padding:14px 0 8px;}
-
-/* DISCLAIMER */
 .disclaimer{font-size:10px;color:var(--amber);background:var(--amber-bg);border:0.5px solid rgba(180,83,9,.15);border-radius:var(--r);padding:10px 12px;line-height:1.7;margin-bottom:14px;}
-
-/* ERROR */
 .error-box{background:var(--red-bg);border:0.5px solid rgba(220,38,38,.2);border-radius:var(--r);padding:10px 12px;font-size:11px;color:var(--red);line-height:1.7;margin-bottom:12px;display:none;}
 .error-box.active{display:block;}
-
-/* EMPTY STATE */
 .empty-state{text-align:center;padding:48px 24px;color:var(--text2);}
 .empty-icon{font-size:28px;display:block;margin-bottom:12px;}
 .empty-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px;}
 .empty-sub{font-size:12px;line-height:1.7;}
-
-/* FOOTER */
 .footer{text-align:center;font-size:10px;color:var(--text3);padding:12px 16px;border-top:0.5px solid var(--border);background:var(--bg);}
-
-.tab-content{display:none;}
-.tab-content.active{display:block;}
-
-/* KEY INPUT */
+.tab-content{display:none;}.tab-content.active{display:block;}
 .key-wrap{padding:20px 16px;}
 .key-title{font-size:17px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px;}
 .key-sub{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:20px;}
-.key-input{width:100%;padding:12px 14px;font-size:14px;border:0.5px solid var(--border2);border-radius:var(--rl);background:var(--bg);color:var(--text);font-family:monospace;letter-spacing:.5px;margin-bottom:10px;}
+.key-input{width:100%;padding:12px 14px;font-size:14px;border:0.5px solid var(--border2);border-radius:var(--rl);background:var(--bg);color:var(--text);font-family:monospace;margin-bottom:10px;}
 .key-input:focus{outline:none;border-color:var(--accent);}
-.key-link{font-size:12px;color:var(--accent);display:block;text-align:center;margin-top:8px;}
+.key-link{font-size:12px;color:var(--accent);display:block;text-align:center;margin-top:10px;}
 </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- PANTALLA: CONFIG API KEY -->
   <div class="screen active" id="s-config">
     <div class="topbar">
       <div class="topbar-logo">
         <div class="topbar-icon">MI</div>
-        <div>
-          <div class="topbar-title">Market Intel</div>
-          <div class="topbar-sub">Configuración inicial</div>
-        </div>
+        <div><div class="topbar-title">Market Intel</div><div class="topbar-sub">Configuracion inicial</div></div>
       </div>
     </div>
     <div class="key-wrap">
       <div class="key-title">Ingresa tu API Key</div>
-      <div class="key-sub">Para usar Market Intel necesitas una API Key de Anthropic. Se guarda solo en tu dispositivo y nunca se comparte.</div>
+      <div class="key-sub">Para usar Market Intel necesitas una API Key de Anthropic. Se guarda solo en tu dispositivo.</div>
       <input class="key-input" type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off" autocorrect="off" spellcheck="false"/>
       <div id="key-error" class="error-box"></div>
-      <button class="btn-primary" onclick="guardarKey()">Guardar y continuar →</button>
+      <button class="btn-primary" onclick="guardarKey()">Guardar y continuar</button>
       <a class="key-link" href="https://console.anthropic.com/settings/keys" target="_blank">Obtener API Key en console.anthropic.com</a>
-      <div style="margin-top:24px;padding:14px;background:var(--bg2);border-radius:var(--rl);font-size:11px;color:var(--text2);line-height:1.7;">
-        💡 <strong>¿Cómo instalar en iPhone?</strong><br>
-        Abre esta página en Safari → toca el botón Compartir → "Agregar a pantalla de inicio"
+      <div style="margin-top:20px;padding:14px;background:var(--bg2);border-radius:var(--rl);font-size:11px;color:var(--text2);line-height:1.7;">
+        Como instalar en iPhone: Abre en Safari, toca Compartir, "Agregar a pantalla de inicio"
       </div>
     </div>
   </div>
 
-  <!-- PANTALLA: PRINCIPAL -->
   <div class="screen" id="s-main">
     <div class="topbar">
       <div class="topbar-logo">
         <div class="topbar-icon">MI</div>
-        <div>
-          <div class="topbar-title">Market Intel</div>
-          <div class="topbar-sub">MAX RISK · AI-POWERED</div>
-        </div>
+        <div><div class="topbar-title">Market Intel</div><div class="topbar-sub">MAX RISK · AI-POWERED</div></div>
       </div>
       <div class="topbar-right">
         <div class="status-pill">
           <div class="sdot" id="sdot"></div>
           <span class="stext" id="stext">IDLE</span>
         </div>
-        <button onclick="go('s-config')" style="font-size:11px;color:var(--text2);background:none;border:none;cursor:pointer;">⚙</button>
+        <button onclick="go('s-config')" style="font-size:14px;color:var(--text2);background:none;border:none;cursor:pointer;padding:4px;">&#9881;</button>
       </div>
     </div>
-
     <div class="nav">
       <button class="nav-tab active" onclick="switchTab('top5')">TOP 5</button>
       <button class="nav-tab" onclick="switchTab('alertas')">ALERTAS</button>
       <button class="nav-tab" onclick="switchTab('informe')">INFORME</button>
     </div>
 
-    <!-- TAB: TOP 5 -->
     <div id="tab-top5" class="tab-content active content">
-      <div class="disclaimer">⚠ Perfil MAX RISK. No constituye asesoramiento financiero. Riesgo de pérdida total.</div>
-      <button class="btn-primary" id="analyze-btn" onclick="runAnalysis()">
-        <span>⚡</span> Analizar mercado esta semana
-      </button>
+      <div class="disclaimer">Perfil MAX RISK. No constituye asesoramiento financiero. Riesgo de perdida total.</div>
+      <button class="btn-primary" id="analyze-btn" onclick="runAnalysis()"><span>&#9889;</span> Analizar mercado esta semana</button>
       <div class="progress-track" id="prog-track"><div class="progress-fill"></div></div>
       <div class="loading-msg" id="load-msg"></div>
       <div class="error-box" id="err-box"></div>
@@ -221,27 +169,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div id="cards-stack"></div>
     </div>
 
-    <!-- TAB: ALERTAS -->
     <div id="tab-alertas" class="tab-content content">
       <div class="section-label">Alertas de mercado</div>
       <div id="alerts-list">
-        <div class="empty-state">
-          <span class="empty-icon">◎</span>
-          <div class="empty-title">Sin análisis activo</div>
-          <div class="empty-sub">Ejecuta el análisis semanal para ver eventos que pueden mover el mercado esta semana.</div>
-        </div>
+        <div class="empty-state"><span class="empty-icon">&#9711;</span><div class="empty-title">Sin analisis activo</div><div class="empty-sub">Ejecuta el analisis semanal para ver eventos que pueden mover el mercado.</div></div>
       </div>
     </div>
 
-    <!-- TAB: INFORME -->
     <div id="tab-informe" class="tab-content content">
       <div class="section-label">Informe semanal</div>
       <div id="report-content">
-        <div class="empty-state">
-          <span class="empty-icon">◻</span>
-          <div class="empty-title">Sin informe</div>
-          <div class="empty-sub">El informe aparece aquí listo para copiar una vez ejecutado el análisis.</div>
-        </div>
+        <div class="empty-state"><span class="empty-icon">&#9633;</span><div class="empty-title">Sin informe</div><div class="empty-sub">El informe aparece aqui listo para copiar una vez ejecutado el analisis.</div></div>
       </div>
     </div>
 
@@ -249,281 +187,325 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 
 </div>
-
 <script>
-const LS_KEY = 'market_intel_v1';
-const LS_API = 'market_intel_key';
-let apiKey = '';
-let lastData = null;
+var LS_KEY='market_intel_v2';
+var LS_API='market_intel_key';
+var apiKey='';
+var lastData=null;
 
-// ─── INIT ───────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  apiKey = localStorage.getItem(LS_API) || '';
-  const saved = localStorage.getItem(LS_KEY);
-  if (saved) {
-    try { lastData = JSON.parse(saved); } catch(e) {}
-  }
-  if (apiKey) {
-    go('s-main');
-    if (lastData) renderAll(lastData);
-  } else {
-    go('s-config');
-  }
+window.addEventListener('DOMContentLoaded',function(){
+  apiKey=localStorage.getItem(LS_API)||'';
+  try{var s=localStorage.getItem(LS_KEY);if(s)lastData=JSON.parse(s);}catch(e){}
+  if(apiKey){go('s-main');if(lastData)renderAll(lastData);}
+  else go('s-config');
 });
 
-// ─── NAVEGACIÓN ─────────────────────────────────────────
-function go(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+function go(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
-function switchTab(tab) {
-  document.querySelectorAll('.nav-tab').forEach((t, i) => {
-    t.classList.toggle('active', ['top5','alertas','informe'][i] === tab);
+function switchTab(tab){
+  document.querySelectorAll('.nav-tab').forEach(function(t,i){
+    t.classList.toggle('active',['top5','alertas','informe'][i]===tab);
   });
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
+  document.getElementById('tab-'+tab).classList.add('active');
 }
 
-// ─── API KEY ─────────────────────────────────────────────
-function guardarKey() {
-  const val = document.getElementById('api-key-input').value.trim();
-  const err = document.getElementById('key-error');
-  if (!val.startsWith('sk-ant-')) {
-    err.textContent = 'La API Key debe comenzar con sk-ant-';
+function guardarKey(){
+  var val=document.getElementById('api-key-input').value.trim();
+  var err=document.getElementById('key-error');
+  if(!val.startsWith('sk-ant-')){
+    err.textContent='La API Key debe comenzar con sk-ant-';
     err.classList.add('active');
     return;
   }
   err.classList.remove('active');
-  apiKey = val;
-  localStorage.setItem(LS_API, apiKey);
+  apiKey=val;
+  localStorage.setItem(LS_API,apiKey);
   go('s-main');
 }
 
-// ─── STATUS ──────────────────────────────────────────────
-function setStatus(txt, state) {
-  document.getElementById('stext').textContent = txt;
-  const d = document.getElementById('sdot');
-  d.className = 'sdot' + (state ? ' ' + state : '');
+function setStatus(txt,state){
+  document.getElementById('stext').textContent=txt;
+  var d=document.getElementById('sdot');
+  d.className='sdot'+(state?' '+state:'');
 }
 
-// ─── ANÁLISIS PRINCIPAL ──────────────────────────────────
-async function runAnalysis() {
-  const btn = document.getElementById('analyze-btn');
-  const prog = document.getElementById('prog-track');
-  const msg = document.getElementById('load-msg');
-  const err = document.getElementById('err-box');
+function setMsg(txt){
+  var m=document.getElementById('load-msg');
+  m.textContent=txt;
+  m.className='loading-msg'+(txt?' active':'');
+}
 
-  btn.disabled = true;
+function showErr(txt){
+  var e=document.getElementById('err-box');
+  e.textContent=txt;
+  e.className='error-box'+(txt?' active':'');
+}
+
+function fixJson(str){
+  // Eliminar texto antes del primer {
+  var start=str.indexOf('{');
+  if(start<0)return null;
+  str=str.slice(start);
+  // Contar llaves y corchetes abiertos
+  var depth=0,adepth=0;
+  for(var i=0;i<str.length;i++){
+    var c=str[i];
+    if(c==='{')depth++;
+    else if(c==='}')depth--;
+    else if(c==='[')adepth++;
+    else if(c===']')adepth--;
+  }
+  // Cerrar los que faltan
+  str=str.replace(/,\s*$/,'');
+  for(var x=0;x<adepth;x++)str+=']';
+  for(var x=0;x<depth;x++)str+='}';
+  // Limpiar trailing comas
+  str=str.replace(/,(\s*[}\]])/g,'$1');
+  return str;
+}
+
+async function callAPI(messages,useSearch,maxTok){
+  var body={model:'claude-sonnet-4-6',max_tokens:maxTok,messages:messages};
+  if(useSearch)body.tools=[{type:'web_search_20250305',name:'web_search'}];
+  var res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':apiKey,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify(body)
+  });
+  if(!res.ok){
+    var txt=await res.text();
+    if(res.status===401)throw new Error('API Key invalida. Ve a Configuracion y actualiza.');
+    if(res.status===429)throw new Error('Rate limit. Espera unos minutos y reintenta.');
+    throw new Error('Error API '+res.status+': '+txt.slice(0,100));
+  }
+  return res.json();
+}
+
+async function runAnalysis(){
+  var btn=document.getElementById('analyze-btn');
+  var prog=document.getElementById('prog-track');
+  btn.disabled=true;
   prog.classList.add('active');
-  err.classList.remove('active');
-  setStatus('ANALIZANDO', 'loading');
+  showErr('');
+  setStatus('ANALIZANDO','loading');
 
-  const steps = [
+  var steps=[
     '> escaneando mercados globales...',
     '> evaluando earnings calendars...',
-    '> analizando momentum técnico...',
+    '> analizando momentum tecnico...',
     '> procesando sentimiento macro...',
     '> detectando catalizadores...',
-    '> calculando scores riesgo/retorno...',
-    '> generando recomendaciones...'
+    '> calculando scores...',
+    '> generando analisis estructurado...'
   ];
-  let i = 0;
-  msg.className = 'loading-msg active';
-  const iv = setInterval(() => { if (i < steps.length) msg.textContent = steps[i++]; }, 900);
+  var si=0;
+  setMsg(steps[0]);
+  var iv=setInterval(function(){if(si<steps.length-1)setMsg(steps[++si]);},1000);
 
-  const today = new Date().toLocaleDateString('es-CL', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
+  var today=new Date().toLocaleDateString('es-CL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 
-  const prompt = `Eres un analista financiero cuantitativo especializado en renta variable global, perfil de riesgo MÁXIMO (alta volatilidad, small caps, biotech especulativo, semiconductores, crypto-adjacent, leverage plays).
-
-Fecha de análisis: ${today}
-
-Busca información actual en internet sobre el estado del mercado esta semana y responde ÚNICAMENTE con JSON válido, sin markdown, sin backticks, sin texto adicional antes o después:
-
-{"contexto_mercado":"2-3 frases sobre estado del mercado esta semana con índices específicos, VIX y datos macro relevantes","sentimiento_general":"ALCISTA","top5":[{"rank":1,"ticker":"XXXX","empresa":"Nombre empresa","sector":"sector","upside_proyectado":"+XX%","catalizador_principal":"catalizador concreto y específico de esta semana","rationale":"2-3 frases justificando por qué esta semana específicamente, con datos concretos","scores":{"momentum_tecnico":85,"fundamentos":70,"catalizador_semana":90,"sentimiento":80},"tag_sector":"Tech","tag_catalyst":"Earnings","riesgo":"MUY ALTO","stop_loss_sugerido":"-8%"},{"rank":2,"ticker":"XXXX","empresa":"Nombre","sector":"sector","upside_proyectado":"+XX%","catalizador_principal":"catalizador","rationale":"justificación con datos","scores":{"momentum_tecnico":80,"fundamentos":65,"catalizador_semana":85,"sentimiento":75},"tag_sector":"Biotech","tag_catalyst":"FDA","riesgo":"EXTREMO","stop_loss_sugerido":"-12%"},{"rank":3,"ticker":"XXXX","empresa":"Nombre","sector":"sector","upside_proyectado":"+XX%","catalizador_principal":"catalizador","rationale":"justificación","scores":{"momentum_tecnico":75,"fundamentos":70,"catalizador_semana":80,"sentimiento":70},"tag_sector":"Energy","tag_catalyst":"M&A","riesgo":"ALTO","stop_loss_sugerido":"-7%"},{"rank":4,"ticker":"XXXX","empresa":"Nombre","sector":"sector","upside_proyectado":"+XX%","catalizador_principal":"catalizador","rationale":"justificación","scores":{"momentum_tecnico":72,"fundamentos":68,"catalizador_semana":78,"sentimiento":65},"tag_sector":"Semis","tag_catalyst":"Earnings","riesgo":"MUY ALTO","stop_loss_sugerido":"-10%"},{"rank":5,"ticker":"XXXX","empresa":"Nombre","sector":"sector","upside_proyectado":"+XX%","catalizador_principal":"catalizador","rationale":"justificación","scores":{"momentum_tecnico":70,"fundamentos":65,"catalizador_semana":75,"sentimiento":60},"tag_sector":"Tech","tag_catalyst":"Producto","riesgo":"ALTO","stop_loss_sugerido":"-8%"}],"alertas":[{"nivel":"CRÍTICO","titulo":"título corto","descripcion":"descripción detallada del evento y su impacto","impacto":"impacto específico en mercados y sectores","fecha_evento":"cuándo ocurre"},{"nivel":"ADVERTENCIA","titulo":"título","descripcion":"descripción","impacto":"impacto","fecha_evento":"fecha"},{"nivel":"INFO","titulo":"título","descripcion":"descripción","impacto":"impacto","fecha_evento":"fecha"}]}
-
-Usa acciones REALES con catalizadores concretos esta semana: earnings inminentes, decisiones FDA, reuniones Fed, datos macro, eventos geopolíticos. Perfil: MÁXIMO RIESGO.`;
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 4000,
-        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-
+  try{
+    // PASO 1: buscar datos del mercado
+    var r1=await callAPI([{role:'user',content:'Fecha: '+today+'. Busca en internet y resume brevemente en menos de 300 palabras: 1) Estado S&P500 Nasdaq VIX esta semana con valores numericos. 2) Los 5 earnings mas importantes que reportan esta semana con sus tickers. 3) Eventos macro clave esta semana (Fed NFP inflacion). 4) Acciones con catalizadores fuertes esta semana: biotech FDA, semiconductores, AI, crypto. Se especifico con tickers y numeros actuales.'}],true,1500);
+    var ctx=(r1.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('\n').slice(0,2000);
     clearInterval(iv);
+    setMsg('> generando analisis estructurado...');
 
-    if (!res.ok) {
-      const txt = await res.text();
-      if (res.status === 401) throw new Error('API Key inválida. Ve a ⚙ Configuración y actualízala.');
-      if (res.status === 429) throw new Error('Rate limit — espera unos minutos y reintenta.');
-      throw new Error(`Error API ${res.status}: ${txt.slice(0, 100)}`);
+    // PASO 2: generar JSON limpio sin caracteres especiales en el prompt
+    var schema='{"cm":"contexto mercado 2 frases con indices y VIX","sg":"ALCISTA","t5":[{"r":1,"tk":"TICK","em":"Empresa","sc":"sector","up":"+15%","cat":"catalizador esta semana","rat":"justificacion 1-2 frases con datos","mt":85,"mf":70,"mc":90,"ms":80,"ts":"Tech","tc":"Earnings","ri":"MUY ALTO","sl":"-8%"},{"r":2,"tk":"TICK","em":"Empresa","sc":"sector","up":"+20%","cat":"catalizador","rat":"justificacion","mt":80,"mf":65,"mc":85,"ms":75,"ts":"Biotech","tc":"FDA","ri":"EXTREMO","sl":"-15%"},{"r":3,"tk":"TICK","em":"Empresa","sc":"sector","up":"+12%","cat":"catalizador","rat":"justificacion","mt":75,"mf":70,"mc":80,"ms":70,"ts":"Semis","tc":"Producto","ri":"ALTO","sl":"-7%"},{"r":4,"tk":"TICK","em":"Empresa","sc":"sector","up":"+18%","cat":"catalizador","rat":"justificacion","mt":72,"mf":68,"mc":78,"ms":65,"ts":"Crypto","tc":"Regulacion","ri":"EXTREMO","sl":"-15%"},{"r":5,"tk":"TICK","em":"Empresa","sc":"sector","up":"+10%","cat":"catalizador","rat":"justificacion","mt":70,"mf":65,"mc":75,"ms":60,"ts":"Energy","tc":"MA","ri":"ALTO","sl":"-8%"}],"al":[{"nv":"CRITICO","ti":"titulo","de":"descripcion del evento","im":"impacto mercados","fe":"fecha"},{"nv":"ADVERTENCIA","ti":"titulo","de":"descripcion","im":"impacto","fe":"fecha"},{"nv":"INFO","ti":"titulo","de":"descripcion","im":"impacto","fe":"fecha"}]}';
+
+    var p2='Eres analista financiero. Perfil MAX RISK. Fecha: '+today+'\n\nDatos del mercado:\n'+ctx+'\n\nResponde SOLO con JSON valido usando exactamente este esquema (sin markdown, sin texto extra, sin caracteres especiales en los valores):\n'+schema;
+
+    var r2=await callAPI([{role:'user',content:p2}],false,3000);
+    var raw=(r2.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+    raw=raw.replace(/```json|```/g,'').trim();
+
+    var fixed=fixJson(raw);
+    if(!fixed)throw new Error('No se encontro JSON en la respuesta. Reintenta.');
+
+    var d;
+    try{d=JSON.parse(fixed);}
+    catch(pe){
+      // Intentar extraer solo el objeto principal
+      try{
+        var m2=raw.match(/\{[^]*\}/);
+        if(m2)d=JSON.parse(m2[0]);
+        else throw pe;
+      }catch(e2){
+        throw new Error('Respuesta malformada. Reintenta. Detalle: '+pe.message);
+      }
     }
 
-    const data = await res.json();
-    let raw = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-    raw = raw.replace(/```json|```/g, '').trim();
-    const match = raw.match(/\{[\s\S]*/);
-    if (!match) throw new Error('No se encontró JSON en la respuesta. Reintenta.');
-    let jsonStr = match[0];
-    const opens = (jsonStr.match(/\{/g)||[]).length - (jsonStr.match(/\}/g)||[]).length;
-    const openArr = (jsonStr.match(/\[/g)||[]).length - (jsonStr.match(/\]/g)||[]).length;
-    jsonStr = jsonStr.replace(/,?\s*$/, '');
-    for(let x=0;x<openArr;x++) jsonStr += ']';
-    for(let x=0;x<opens;x++) jsonStr += '}';
-    jsonStr = jsonStr.replace(/,\s*([}\]])/g, '$1');
-    let d;
-    try { d = JSON.parse(jsonStr); }
-    catch(pe) { throw new Error('Respuesta malformada: ' + pe.message + '. Reintenta.'); }
-    if (!d.top5 || !d.top5.length) throw new Error('Respuesta incompleta. Reintenta.');
+    // Normalizar formato (el esquema usa claves cortas)
+    var norm=normalizeData(d);
+    if(!norm.top5||!norm.top5.length)throw new Error('Respuesta sin datos de acciones. Reintenta.');
 
-    lastData = d;
-    localStorage.setItem(LS_KEY, JSON.stringify(d));
-    renderAll(d);
+    lastData=norm;
+    localStorage.setItem(LS_KEY,JSON.stringify(norm));
+    renderAll(norm);
+    setStatus('LIVE','ok');
+    var now=new Date();
+    document.getElementById('footer-txt').textContent='Actualizado '+now.toLocaleDateString('es-CL')+' · '+now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
 
-    setStatus('LIVE', 'ok');
-    const now = new Date();
-    document.getElementById('footer-txt').textContent =
-      'Actualizado ' + now.toLocaleDateString('es-CL') + ' · ' + now.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
-
-  } catch (e) {
+  }catch(e){
     clearInterval(iv);
-    setStatus('ERROR', 'error');
-    const errBox = document.getElementById('err-box');
-    errBox.textContent = '✕ ' + e.message;
-    errBox.classList.add('active');
-  } finally {
-    btn.disabled = false;
+    setStatus('ERROR','error');
+    showErr(e.message);
+  }finally{
+    btn.disabled=false;
     prog.classList.remove('active');
-    setTimeout(() => msg.classList.remove('active'), 3000);
+    setTimeout(function(){setMsg('');},3000);
   }
 }
 
-// ─── RENDER ───────────────────────────────────────────────
-function renderAll(d) {
-  renderAnalysis(d);
-  renderAlerts(d.alertas || []);
-  renderReport(d);
+function normalizeData(d){
+  // Soporta tanto claves largas como cortas
+  var out={};
+  out.contexto_mercado=d.contexto_mercado||d.cm||'';
+  out.sentimiento_general=d.sentimiento_general||d.sg||'MIXTO';
+  var raw5=d.top5||d.t5||[];
+  out.top5=raw5.map(function(s){
+    return {
+      rank:s.rank||s.r||1,
+      ticker:s.ticker||s.tk||'',
+      empresa:s.empresa||s.em||'',
+      sector:s.sector||s.sc||'',
+      upside_proyectado:s.upside_proyectado||s.up||'+?%',
+      catalizador_principal:s.catalizador_principal||s.cat||'',
+      rationale:s.rationale||s.rat||'',
+      scores:{
+        momentum_tecnico:s.scores?s.scores.momentum_tecnico:(s.mt||70),
+        fundamentos:s.scores?s.scores.fundamentos:(s.mf||65),
+        catalizador_semana:s.scores?s.scores.catalizador_semana:(s.mc||75),
+        sentimiento:s.scores?s.scores.sentimiento:(s.ms||70)
+      },
+      tag_sector:s.tag_sector||s.ts||s.sector||'',
+      tag_catalyst:s.tag_catalyst||s.tc||'',
+      riesgo:s.riesgo||s.ri||'ALTO',
+      stop_loss_sugerido:s.stop_loss_sugerido||s.sl||'N/A'
+    };
+  });
+  var rawAl=d.alertas||d.al||[];
+  out.alertas=rawAl.map(function(a){
+    return {
+      nivel:a.nivel||a.nv||'INFO',
+      titulo:a.titulo||a.ti||'',
+      descripcion:a.descripcion||a.de||'',
+      impacto:a.impacto||a.im||'',
+      fecha_evento:a.fecha_evento||a.fe||'Esta semana'
+    };
+  });
+  return out;
 }
 
-function renderAnalysis(d) {
-  const sc = d.sentimiento_general || 'MIXTO';
-  const cls = sc === 'ALCISTA' ? 'bull' : sc === 'BAJISTA' ? 'bear' : 'mix';
-  document.getElementById('mkt-ctx').innerHTML =
-    `<div class="mkt-ctx"><span class="sentiment-badge ${cls}">${sc}</span>${d.contexto_mercado}</div>`;
-  document.getElementById('top5-label').style.display = 'block';
+function renderAll(d){renderAnalysis(d);renderAlerts(d.alertas||[]);renderReport(d);}
 
-  const stack = document.getElementById('cards-stack');
-  stack.innerHTML = '';
-  (d.top5 || []).forEach(s => {
-    const rColor = s.riesgo === 'EXTREMO' ? 'var(--red)' : s.riesgo === 'MUY ALTO' ? 'var(--amber)' : 'var(--text2)';
-    const sc2 = s.scores || {};
-    const rows = [
-      ['Momentum', sc2.momentum_tecnico || 0],
-      ['Fundamentos', sc2.fundamentos || 0],
-      ['Catalizador', sc2.catalizador_semana || 0],
-      ['Sentimiento', sc2.sentimiento || 0]
+function renderAnalysis(d){
+  var sc=d.sentimiento_general||'MIXTO';
+  var cls=sc==='ALCISTA'?'bull':sc==='BAJISTA'?'bear':'mix';
+  document.getElementById('mkt-ctx').innerHTML='<div class="mkt-ctx"><span class="sentiment-badge '+cls+'">'+sc+'</span>'+escHtml(d.contexto_mercado)+'</div>';
+  document.getElementById('top5-label').style.display='block';
+  var stack=document.getElementById('cards-stack');
+  stack.innerHTML='';
+  (d.top5||[]).forEach(function(s){
+    var rColor=s.riesgo==='EXTREMO'?'var(--red)':s.riesgo==='MUY ALTO'?'var(--amber)':'var(--text2)';
+    var sc2=s.scores||{};
+    var rows=[
+      ['Momentum',sc2.momentum_tecnico||0],
+      ['Fundamentos',sc2.fundamentos||0],
+      ['Catalizador',sc2.catalizador_semana||0],
+      ['Sentimiento',sc2.sentimiento||0]
     ];
-    const card = document.createElement('div');
-    card.className = `stock-card r${s.rank <= 3 ? s.rank : ''}`;
-    card.innerHTML = `
-      <div class="sc-body">
-        <div class="sc-top">
-          <div class="sc-left">
-            <div class="rank ${s.rank <= 2 ? 'top' : ''}">#${s.rank}</div>
-            <div>
-              <div class="ticker">${s.ticker}</div>
-              <div class="empresa">${s.empresa}</div>
-            </div>
-          </div>
-          <div class="sc-right">
-            <div class="upside">${s.upside_proyectado}</div>
-            <div class="riesgo-label" style="color:${rColor}">${s.riesgo}</div>
-          </div>
-        </div>
-        <div class="tags">
-          <span class="tag tag-s">${s.tag_sector || s.sector}</span>
-          <span class="tag tag-c">${s.tag_catalyst || s.catalizador_principal}</span>
-          <span class="tag tag-r">SL ${s.stop_loss_sugerido || 'N/A'}</span>
-        </div>
-        ${rows.map(([l, v]) => `
-          <div class="score-row">
-            <span class="score-lbl">${l}</span>
-            <div class="score-track"><div class="score-fill" style="width:${v}%"></div></div>
-            <span class="score-val">${v}</span>
-          </div>`).join('')}
-        <div class="rationale">
-          <span class="rationale-title">${s.catalizador_principal}</span>
-          ${s.rationale}
-        </div>
-      </div>`;
+    var card=document.createElement('div');
+    card.className='stock-card r'+(s.rank<=3?s.rank:'');
+    card.innerHTML='<div class="sc-body">'+
+      '<div class="sc-top">'+
+        '<div class="sc-left">'+
+          '<div class="rank'+(s.rank<=2?' top':'')+'">#'+s.rank+'</div>'+
+          '<div><div class="ticker">'+escHtml(s.ticker)+'</div><div class="empresa">'+escHtml(s.empresa)+'</div></div>'+
+        '</div>'+
+        '<div class="sc-right">'+
+          '<div class="upside">'+escHtml(s.upside_proyectado)+'</div>'+
+          '<div class="riesgo-label" style="color:'+rColor+'">'+escHtml(s.riesgo)+'</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="tags">'+
+        '<span class="tag tag-s">'+escHtml(s.tag_sector)+'</span>'+
+        '<span class="tag tag-c">'+escHtml(s.tag_catalyst)+'</span>'+
+        '<span class="tag tag-r">SL '+escHtml(s.stop_loss_sugerido)+'</span>'+
+      '</div>'+
+      rows.map(function(rv){return '<div class="score-row"><span class="score-lbl">'+rv[0]+'</span><div class="score-track"><div class="score-fill" style="width:'+rv[1]+'%"></div></div><span class="score-val">'+rv[1]+'</span></div>';}).join('')+
+      '<div class="rationale"><span class="rationale-title">'+escHtml(s.catalizador_principal)+'</span>'+escHtml(s.rationale)+'</div>'+
+    '</div>';
     stack.appendChild(card);
   });
 }
 
-function renderAlerts(alerts) {
-  const list = document.getElementById('alerts-list');
-  if (!alerts.length) {
-    list.innerHTML = '<div class="empty-state"><span class="empty-icon">◎</span><div class="empty-title">Sin alertas críticas</div><div class="empty-sub">No se detectaron eventos disruptivos esta semana.</div></div>';
+function renderAlerts(alerts){
+  var list=document.getElementById('alerts-list');
+  if(!alerts.length){
+    list.innerHTML='<div class="empty-state"><span class="empty-icon">&#9711;</span><div class="empty-title">Sin alertas criticas</div><div class="empty-sub">No se detectaron eventos disruptivos esta semana.</div></div>';
     return;
   }
-  list.innerHTML = '';
-  alerts.forEach(a => {
-    const cls = a.nivel === 'CRÍTICO' ? 'critical' : a.nivel === 'ADVERTENCIA' ? 'warning' : 'info';
-    const div = document.createElement('div');
-    div.className = `alert-card ${cls}`;
-    div.innerHTML = `
-      <div class="alert-body">
-        <div class="alert-header">
-          <span class="alert-level">${a.nivel}</span>
-          <span class="alert-title">${a.titulo}</span>
-          <span class="alert-date">${a.fecha_evento || 'Esta semana'}</span>
-        </div>
-        <div class="alert-desc">${a.descripcion}</div>
-        <div class="alert-impact">Impacto · ${a.impacto}</div>
-      </div>`;
+  list.innerHTML='';
+  alerts.forEach(function(a){
+    var cls=a.nivel==='CRITICO'||a.nivel==='CRÍTICO'?'critical':a.nivel==='ADVERTENCIA'?'warning':'info';
+    var div=document.createElement('div');
+    div.className='alert-card '+cls;
+    div.innerHTML='<div class="alert-body">'+
+      '<div class="alert-header">'+
+        '<span class="alert-level">'+escHtml(a.nivel)+'</span>'+
+        '<span class="alert-title-txt">'+escHtml(a.titulo)+'</span>'+
+        '<span class="alert-date">'+escHtml(a.fecha_evento||'Esta semana')+'</span>'+
+      '</div>'+
+      '<div class="alert-desc">'+escHtml(a.descripcion)+'</div>'+
+      '<div class="alert-impact">Impacto: '+escHtml(a.impacto)+'</div>'+
+    '</div>';
     list.appendChild(div);
   });
 }
 
-function renderReport(d) {
-  const now = new Date();
-  const ds = now.toLocaleDateString('es-CL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  let r = `MARKET INTEL — INFORME SEMANAL\n${ds.toUpperCase()}\nPerfil: MÁXIMO RIESGO\n${'─'.repeat(36)}\n\nCONTEXTO DE MERCADO\n${d.sentimiento_general} · ${d.contexto_mercado}\n\n${'─'.repeat(36)}\nTOP 5 ACCIONES\n${'─'.repeat(36)}\n\n`;
-  (d.top5 || []).forEach(s => {
-    r += `#${s.rank} ${s.ticker} — ${s.empresa}\nSector: ${s.sector}\nUpside: ${s.upside_proyectado} · Riesgo: ${s.riesgo} · SL: ${s.stop_loss_sugerido || 'N/A'}\nCatalizador: ${s.catalizador_principal}\n${s.rationale}\n\n`;
+function renderReport(d){
+  var now=new Date();
+  var ds=now.toLocaleDateString('es-CL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var sep='----------------------------------------';
+  var r='MARKET INTEL - INFORME SEMANAL\n'+ds.toUpperCase()+'\nPerfil: MAXIMO RIESGO\n'+sep+'\n\nCONTEXTO DE MERCADO\n'+d.sentimiento_general+' - '+d.contexto_mercado+'\n\n'+sep+'\nTOP 5 ACCIONES\n'+sep+'\n\n';
+  (d.top5||[]).forEach(function(s){
+    r+='#'+s.rank+' '+s.ticker+' - '+s.empresa+'\nSector: '+s.sector+'\nUpside: '+s.upside_proyectado+' | Riesgo: '+s.riesgo+' | SL: '+s.stop_loss_sugerido+'\nCatalizador: '+s.catalizador_principal+'\n'+s.rationale+'\n\n';
   });
-  r += `${'─'.repeat(36)}\nALERTAS\n${'─'.repeat(36)}\n\n`;
-  (d.alertas || []).forEach(a => {
-    r += `[${a.nivel}] ${a.titulo} · ${a.fecha_evento || 'Esta semana'}\n${a.descripcion}\nImpacto: ${a.impacto}\n\n`;
+  r+=sep+'\nALERTAS\n'+sep+'\n\n';
+  (d.alertas||[]).forEach(function(a){
+    r+='['+a.nivel+'] '+a.titulo+' - '+a.fecha_evento+'\n'+a.descripcion+'\nImpacto: '+a.impacto+'\n\n';
   });
-  r += `${'─'.repeat(36)}\n⚠ No constituye asesoramiento financiero.\nRiesgo de pérdida total del capital.`;
-
-  document.getElementById('report-content').innerHTML = `
-    <div class="report-box" id="rep-txt">${r}</div>
-    <button class="btn-secondary" onclick="copyReport()" style="margin-bottom:24px;">Copiar informe completo</button>`;
+  r+=sep+'\nNo constituye asesoramiento financiero.';
+  document.getElementById('report-content').innerHTML=
+    '<div class="report-box" id="rep-txt">'+escHtml(r)+'</div>'+
+    '<button class="btn-secondary" onclick="copyReport()" style="margin-bottom:24px;">Copiar informe completo</button>';
 }
 
-function copyReport() {
-  navigator.clipboard.writeText(document.getElementById('rep-txt').textContent).then(() => {
-    const b = document.querySelector('#tab-informe .btn-secondary');
-    const orig = b.textContent;
-    b.textContent = '✓ Copiado al portapapeles';
-    setTimeout(() => b.textContent = orig, 2000);
+function copyReport(){
+  var txt=document.getElementById('rep-txt').textContent;
+  navigator.clipboard.writeText(txt).then(function(){
+    var b=document.querySelector('#tab-informe .btn-secondary');
+    var orig=b.textContent;
+    b.textContent='Copiado al portapapeles';
+    setTimeout(function(){b.textContent=orig;},2000);
   });
+}
+
+function escHtml(s){
+  if(!s)return'';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
