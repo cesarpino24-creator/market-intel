@@ -358,7 +358,7 @@ Usa acciones REALES con catalizadores concretos esta semana: earnings inminentes
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 2000,
+        max_tokens: 4000,
         tools: [{ type: 'web_search_20250305', name: 'web_search' }],
         messages: [{ role: 'user', content: prompt }]
       })
@@ -376,10 +376,18 @@ Usa acciones REALES con catalizadores concretos esta semana: earnings inminentes
     const data = await res.json();
     let raw = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
     raw = raw.replace(/```json|```/g, '').trim();
-    const match = raw.match(/\{[\s\S]*\}/);
+    const match = raw.match(/\{[\s\S]*/);
     if (!match) throw new Error('No se encontró JSON en la respuesta. Reintenta.');
-
-    const d = JSON.parse(match[0]);
+    let jsonStr = match[0];
+    const opens = (jsonStr.match(/\{/g)||[]).length - (jsonStr.match(/\}/g)||[]).length;
+    const openArr = (jsonStr.match(/\[/g)||[]).length - (jsonStr.match(/\]/g)||[]).length;
+    jsonStr = jsonStr.replace(/,?\s*$/, '');
+    for(let x=0;x<openArr;x++) jsonStr += ']';
+    for(let x=0;x<opens;x++) jsonStr += '}';
+    jsonStr = jsonStr.replace(/,\s*([}\]])/g, '$1');
+    let d;
+    try { d = JSON.parse(jsonStr); }
+    catch(pe) { throw new Error('Respuesta malformada: ' + pe.message + '. Reintenta.'); }
     if (!d.top5 || !d.top5.length) throw new Error('Respuesta incompleta. Reintenta.');
 
     lastData = d;
