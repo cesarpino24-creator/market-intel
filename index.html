@@ -35,14 +35,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sdot.error{background:var(--red);}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
 .stext{font-size:10px;color:var(--text2);letter-spacing:.4px;}
-.nav{display:flex;background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 8px;}
-.nav-tab{flex:1;padding:12px 4px;font-size:11px;letter-spacing:.7px;background:none;border:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;font-family:inherit;}
+.nav{display:flex;background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 4px;}
+.nav-tab{flex:1;padding:11px 2px;font-size:10px;letter-spacing:.5px;background:none;border:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;font-family:inherit;}
 .nav-tab.active{color:var(--text);border-bottom-color:var(--text);}
 .content{padding:16px;}
 .btn-primary{width:100%;padding:14px;font-size:14px;font-weight:600;background:#1a1a1a;color:#fff;border:none;border-radius:var(--rl);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-primary:hover{background:#2d2d2d;}
 .btn-primary:disabled{background:var(--text3);cursor:not-allowed;}
-.btn-secondary{width:100%;padding:12px;font-size:13px;font-weight:500;background:var(--bg2);color:var(--text);border:0.5px solid var(--border2);border-radius:var(--r);cursor:pointer;font-family:inherit;}
+.btn-pdf{width:100%;padding:13px;font-size:13px;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:var(--r);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:10px;}
+.btn-pdf:hover{background:#1e40af;}
+.btn-pdf:disabled{background:var(--text3);cursor:not-allowed;}
 .progress-track{height:2px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:12px;display:none;}
 .progress-track.active{display:block;}
 .progress-fill{height:100%;background:var(--accent);animation:prog 2.5s infinite;}
@@ -96,7 +98,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .alert-date{font-size:10px;color:var(--text2);}
 .alert-desc{font-size:11px;color:var(--text2);line-height:1.7;}
 .alert-impact{font-size:10px;color:var(--text2);margin-top:5px;}
-.report-box{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--rl);padding:14px;font-size:11px;color:var(--text2);line-height:1.9;white-space:pre-wrap;word-break:break-word;max-height:400px;overflow-y:auto;margin-bottom:10px;font-family:monospace;}
 .section-label{font-size:10px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;padding:14px 0 8px;}
 .disclaimer{font-size:10px;color:var(--amber);background:var(--amber-bg);border:0.5px solid rgba(180,83,9,.15);border-radius:var(--r);padding:10px 12px;line-height:1.7;margin-bottom:14px;}
 .error-box{background:var(--red-bg);border:0.5px solid rgba(220,38,38,.2);border-radius:var(--r);padding:10px 12px;font-size:11px;color:var(--red);line-height:1.7;margin-bottom:12px;display:none;}
@@ -113,9 +114,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .key-input{width:100%;padding:12px 14px;font-size:14px;border:0.5px solid var(--border2);border-radius:var(--rl);background:var(--bg);color:var(--text);font-family:monospace;margin-bottom:10px;}
 .key-input:focus{outline:none;border-color:var(--accent);}
 .key-link{font-size:12px;color:var(--accent);display:block;text-align:center;margin-top:10px;}
-
-/* REVISION SEMANA ANTERIOR */
-.revision-section{margin-bottom:6px;}
 .revision-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:8px;overflow:hidden;position:relative;}
 .revision-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
 .revision-card.mantener::before{background:var(--green);}
@@ -123,9 +121,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .revision-card.vender::before{background:var(--red);}
 .rev-body{padding:12px 14px 12px 17px;}
 .rev-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
-.rev-ticker{font-size:14px;font-weight:700;letter-spacing:-.2px;}
+.rev-ticker{font-size:14px;font-weight:700;}
 .rev-empresa{font-size:10px;color:var(--text2);}
-.accion-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;letter-spacing:.3px;}
+.accion-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;}
 .mantener .accion-badge{background:var(--green-bg);color:var(--green);}
 .aumentar .accion-badge{background:var(--accent-bg);color:var(--accent);}
 .vender .accion-badge{background:var(--red-bg);color:var(--red);}
@@ -175,7 +173,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="nav-tab active" onclick="switchTab('top5')">TOP 5</button>
       <button class="nav-tab" onclick="switchTab('revision')">REVISION</button>
       <button class="nav-tab" onclick="switchTab('alertas')">ALERTAS</button>
-      <button class="nav-tab" onclick="switchTab('informe')">INFORME</button>
+      <button class="nav-tab" onclick="switchTab('informe')">INFORME PDF</button>
     </div>
 
     <div id="tab-top5" class="tab-content active content">
@@ -192,7 +190,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="tab-revision" class="tab-content content">
       <div class="section-label">Revision semana anterior</div>
       <div id="revision-list">
-        <div class="empty-state"><span class="empty-icon">&#8635;</span><div class="empty-title">Sin historial aun</div><div class="empty-sub">La primera vez que ejecutes el analisis no habra semana anterior que revisar. Desde la segunda semana en adelante aparecera aqui la evaluacion de mantener, aumentar o vender cada posicion.</div></div>
+        <div class="empty-state"><span class="empty-icon">&#8635;</span><div class="empty-title">Sin historial aun</div><div class="empty-sub">Desde la segunda semana de uso aparecera aqui la evaluacion de mantener, aumentar o vender cada posicion.</div></div>
       </div>
     </div>
 
@@ -204,9 +202,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div id="tab-informe" class="tab-content content">
-      <div class="section-label">Informe semanal</div>
-      <div id="report-content">
-        <div class="empty-state"><span class="empty-icon">&#9633;</span><div class="empty-title">Sin informe</div><div class="empty-sub">El informe aparece aqui listo para copiar una vez ejecutado el analisis.</div></div>
+      <div class="section-label">Informe PDF</div>
+      <div id="informe-state">
+        <div class="empty-state"><span class="empty-icon">&#128196;</span><div class="empty-title">Sin datos</div><div class="empty-sub">Ejecuta el analisis semanal para poder generar el informe en PDF.</div></div>
       </div>
     </div>
 
@@ -214,9 +212,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-var LS_KEY='market_intel_v4';
-var LS_PREV='market_intel_prev_v4';
+var LS_KEY='market_intel_v5';
+var LS_PREV='market_intel_prev_v5';
 var LS_API='market_intel_key';
 var apiKey='';
 var lastData=null;
@@ -228,7 +228,7 @@ window.addEventListener('DOMContentLoaded',function(){
   try{var p=localStorage.getItem(LS_PREV);if(p)prevData=JSON.parse(p);}catch(e){}
   if(apiKey){
     go('s-main');
-    if(lastData)renderAll(lastData);
+    if(lastData){renderAll(lastData);showPdfBtn();}
     if(prevData&&prevData.revision)renderRevision(prevData.revision);
   } else go('s-config');
 });
@@ -252,8 +252,7 @@ function guardarKey(){
   var err=document.getElementById('key-error');
   if(!val.startsWith('sk-ant-')){
     err.textContent='La API Key debe comenzar con sk-ant-';
-    err.classList.add('active');
-    return;
+    err.classList.add('active');return;
   }
   err.classList.remove('active');
   apiKey=val;
@@ -266,17 +265,23 @@ function setStatus(txt,state){
   var d=document.getElementById('sdot');
   d.className='sdot'+(state?' '+state:'');
 }
-
 function setMsg(txt){
   var m=document.getElementById('load-msg');
   m.textContent=txt;
   m.className='loading-msg'+(txt?' active':'');
 }
-
 function showErr(txt){
   var e=document.getElementById('err-box');
   e.textContent=txt?txt:'';
   e.className='error-box'+(txt?' active':'');
+}
+
+function showPdfBtn(){
+  document.getElementById('informe-state').innerHTML=
+    '<div style="padding:4px 0 16px;">' +
+    '<button class="btn-pdf" id="pdf-btn" onclick="generarPDF()">&#128196; Descargar Informe PDF</button>'+
+    '<div style="font-size:11px;color:var(--text2);text-align:center;line-height:1.7;">Incluye Top 5, Revision y Alertas<br>en formato dashboard profesional</div>'+
+    '</div>';
 }
 
 function fixJson(str){
@@ -299,95 +304,60 @@ function fixJson(str){
 async function runAnalysis(){
   var btn=document.getElementById('analyze-btn');
   var prog=document.getElementById('prog-track');
-  btn.disabled=true;
-  prog.classList.add('active');
-  showErr('');
-  setStatus('ANALIZANDO','loading');
-
+  btn.disabled=true;prog.classList.add('active');
+  showErr('');setStatus('ANALIZANDO','loading');
   var steps=['> conectando con mercados...','> buscando datos actuales...','> analizando earnings y catalizadores...','> evaluando posiciones anteriores...','> generando recomendaciones...'];
-  var si=0;
-  setMsg(steps[0]);
+  var si=0;setMsg(steps[0]);
   var iv=setInterval(function(){if(si<steps.length-1)setMsg(steps[++si]);},1800);
-
   var today=new Date().toLocaleDateString('es-CL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-
-  // Construir contexto de semana anterior si existe
   var prevContext='';
   if(lastData&&lastData.top5&&lastData.top5.length){
     var fechaPrev=lastData.fecha_analisis||'semana anterior';
-    prevContext='\n\nACCIONES RECOMENDADAS LA SEMANA ANTERIOR ('+fechaPrev+'):\n';
-    lastData.top5.forEach(function(s){
-      prevContext+='- '+s.ticker+' ('+s.empresa+'): upside proyectado '+s.upside_proyectado+', catalizador: '+s.catalizador_principal+'\n';
-    });
-    prevContext+='\nPara cada una de estas acciones debes evaluar si HOY se debe MANTENER, AUMENTAR o VENDER la posicion basado en el contexto actual del mercado esta semana.';
+    prevContext='\n\nACCIONES SEMANA ANTERIOR ('+fechaPrev+'):\n';
+    lastData.top5.forEach(function(s){prevContext+='- '+s.ticker+' ('+s.empresa+'): upside '+s.upside_proyectado+', catalizador: '+s.catalizador_principal+'\n';});
+    prevContext+='\nEvalua cada una: MANTENER, AUMENTAR o VENDER segun contexto actual.';
   }
-
   var prompt='Fecha: '+today+'\n\nEres analista financiero cuantitativo con perfil de riesgo MAXIMO.\n\nBusca en internet informacion actual sobre el mercado esta semana y genera el analisis completo.'+prevContext+'\n\nResponde SOLO con este JSON (sin texto antes ni despues, sin markdown):\n\n{"cm":"contexto mercado 2 frases con valores reales de SP500 Nasdaq VIX","sg":"ALCISTA","fd":"'+today+'","t5":[{"r":1,"tk":"TICK","em":"Empresa","sc":"Tech","up":"+15%","cat":"catalizador esta semana","rat":"justificacion breve con datos","mt":85,"mf":70,"mc":90,"ms":80,"ts":"Tech","tc":"Earnings","ri":"MUY ALTO","sl":"-8%"},{"r":2,"tk":"TICK","em":"Empresa","sc":"Biotech","up":"+20%","cat":"catalizador","rat":"justificacion","mt":80,"mf":65,"mc":88,"ms":75,"ts":"Biotech","tc":"FDA","ri":"EXTREMO","sl":"-15%"},{"r":3,"tk":"TICK","em":"Empresa","sc":"Semis","up":"+12%","cat":"catalizador","rat":"justificacion","mt":75,"mf":70,"mc":80,"ms":70,"ts":"Semis","tc":"Producto","ri":"ALTO","sl":"-7%"},{"r":4,"tk":"TICK","em":"Empresa","sc":"Crypto","up":"+18%","cat":"catalizador","rat":"justificacion","mt":72,"mf":65,"mc":78,"ms":68,"ts":"Crypto","tc":"Regulacion","ri":"EXTREMO","sl":"-15%"},{"r":5,"tk":"TICK","em":"Empresa","sc":"Energy","up":"+10%","cat":"catalizador","rat":"justificacion","mt":70,"mf":65,"mc":75,"ms":62,"ts":"Energy","tc":"MA","ri":"ALTO","sl":"-8%"}],"al":[{"nv":"CRITICO","ti":"titulo","de":"descripcion detallada del evento","im":"impacto en mercados","fe":"fecha"},{"nv":"ADVERTENCIA","ti":"titulo","de":"descripcion","im":"impacto","fe":"fecha"},{"nv":"INFO","ti":"titulo","de":"descripcion","im":"impacto","fe":"fecha"}],"rv":[{"tk":"TICK","em":"Empresa","ac":"MANTENER","rz":"razon concreta basada en contexto actual","var":"+X%","conf":"ALTA"}]}';
-
   try{
     var res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key':apiKey,
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access':'true'
-      },
-      body:JSON.stringify({
-        model:'claude-sonnet-4-6',
-        max_tokens:4000,
-        tools:[{type:'web_search_20250305',name:'web_search'}],
-        messages:[{role:'user',content:prompt}]
-      })
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:4000,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]})
     });
-
     clearInterval(iv);
-
     if(!res.ok){
       var txt=await res.text();
-      if(res.status===401)throw new Error('API Key invalida. Ve a configuracion y actualiza.');
+      if(res.status===401)throw new Error('API Key invalida. Ve a configuracion.');
       if(res.status===429)throw new Error('Rate limit. Espera 2 minutos y reintenta.');
-      throw new Error('Error API '+res.status+'. Reintenta en unos minutos.');
+      throw new Error('Error API '+res.status+'. Reintenta.');
     }
-
     var data=await res.json();
     var raw=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
     raw=raw.replace(/```json|```/g,'').trim();
     var fixed=fixJson(raw);
-    if(!fixed)throw new Error('Sin respuesta del modelo. Reintenta.');
+    if(!fixed)throw new Error('Sin respuesta. Reintenta.');
     var d;
-    try{d=JSON.parse(fixed);}
-    catch(pe){throw new Error('Error procesando respuesta. Reintenta.');}
-
+    try{d=JSON.parse(fixed);}catch(pe){throw new Error('Error procesando respuesta. Reintenta.');}
     var norm=normalizeData(d);
     if(!norm.top5||!norm.top5.length)throw new Error('Datos incompletos. Reintenta.');
-
-    // Guardar semana anterior antes de sobreescribir
     if(lastData){
       var prevToSave={fecha:lastData.fecha_analisis||today,top5:lastData.top5};
-      if(norm.revision&&norm.revision.length){
-        prevToSave.revision=norm.revision;
-      }
+      if(norm.revision&&norm.revision.length)prevToSave.revision=norm.revision;
       localStorage.setItem(LS_PREV,JSON.stringify(prevToSave));
       prevData=prevToSave;
     }
-
     lastData=norm;
     localStorage.setItem(LS_KEY,JSON.stringify(norm));
     renderAll(norm);
     if(norm.revision&&norm.revision.length)renderRevision(norm.revision);
-
+    showPdfBtn();
     setStatus('LIVE','ok');
     var now=new Date();
     document.getElementById('footer-txt').textContent='Actualizado '+now.toLocaleDateString('es-CL')+' - '+now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
-
   }catch(e){
-    clearInterval(iv);
-    setStatus('ERROR','error');
-    showErr(e.message);
+    clearInterval(iv);setStatus('ERROR','error');showErr(e.message);
   }finally{
-    btn.disabled=false;
-    prog.classList.remove('active');
+    btn.disabled=false;prog.classList.remove('active');
     setTimeout(function(){setMsg('');},3000);
   }
 }
@@ -398,157 +368,322 @@ function normalizeData(d){
   out.sentimiento_general=d.sentimiento_general||d.sg||'MIXTO';
   out.fecha_analisis=d.fecha_analisis||d.fd||new Date().toLocaleDateString('es-CL');
   var raw5=d.top5||d.t5||[];
-  out.top5=raw5.map(function(s){
-    return{
-      rank:s.rank||s.r||1,
-      ticker:s.ticker||s.tk||'',
-      empresa:s.empresa||s.em||'',
-      sector:s.sector||s.sc||'',
-      upside_proyectado:s.upside_proyectado||s.up||'+?%',
-      catalizador_principal:s.catalizador_principal||s.cat||'',
-      rationale:s.rationale||s.rat||'',
-      scores:{
-        momentum_tecnico:s.scores?s.scores.momentum_tecnico:(s.mt||70),
-        fundamentos:s.scores?s.scores.fundamentos:(s.mf||65),
-        catalizador_semana:s.scores?s.scores.catalizador_semana:(s.mc||75),
-        sentimiento:s.scores?s.scores.sentimiento:(s.ms||70)
-      },
-      tag_sector:s.tag_sector||s.ts||s.sector||'',
-      tag_catalyst:s.tag_catalyst||s.tc||'',
-      riesgo:s.riesgo||s.ri||'ALTO',
-      stop_loss_sugerido:s.stop_loss_sugerido||s.sl||'N/A'
-    };
-  });
+  out.top5=raw5.map(function(s){return{rank:s.rank||s.r||1,ticker:s.ticker||s.tk||'',empresa:s.empresa||s.em||'',sector:s.sector||s.sc||'',upside_proyectado:s.upside_proyectado||s.up||'+?%',catalizador_principal:s.catalizador_principal||s.cat||'',rationale:s.rationale||s.rat||'',scores:{momentum_tecnico:s.scores?s.scores.momentum_tecnico:(s.mt||70),fundamentos:s.scores?s.scores.fundamentos:(s.mf||65),catalizador_semana:s.scores?s.scores.catalizador_semana:(s.mc||75),sentimiento:s.scores?s.scores.sentimiento:(s.ms||70)},tag_sector:s.tag_sector||s.ts||s.sector||'',tag_catalyst:s.tag_catalyst||s.tc||'',riesgo:s.riesgo||s.ri||'ALTO',stop_loss_sugerido:s.stop_loss_sugerido||s.sl||'N/A'};});
   var rawAl=d.alertas||d.al||[];
-  out.alertas=rawAl.map(function(a){
-    return{
-      nivel:a.nivel||a.nv||'INFO',
-      titulo:a.titulo||a.ti||'',
-      descripcion:a.descripcion||a.de||'',
-      impacto:a.impacto||a.im||'',
-      fecha_evento:a.fecha_evento||a.fe||'Esta semana'
-    };
-  });
+  out.alertas=rawAl.map(function(a){return{nivel:a.nivel||a.nv||'INFO',titulo:a.titulo||a.ti||'',descripcion:a.descripcion||a.de||'',impacto:a.impacto||a.im||'',fecha_evento:a.fecha_evento||a.fe||'Esta semana'};});
   var rawRv=d.revision||d.rv||[];
-  out.revision=rawRv.map(function(r){
-    return{
-      ticker:r.ticker||r.tk||'',
-      empresa:r.empresa||r.em||'',
-      accion:r.accion||r.ac||'MANTENER',
-      razon:r.razon||r.rz||'',
-      variacion:r.variacion||r.var||'N/A',
-      confianza:r.confianza||r.conf||'MEDIA'
-    };
-  });
+  out.revision=rawRv.map(function(r){return{ticker:r.ticker||r.tk||'',empresa:r.empresa||r.em||'',accion:r.accion||r.ac||'MANTENER',razon:r.razon||r.rz||'',variacion:r.variacion||r.var||'N/A',confianza:r.confianza||r.conf||'MEDIA'};});
   return out;
 }
 
-function renderAll(d){renderAnalysis(d);renderAlerts(d.alertas||[]);renderReport(d);}
-
-function renderRevision(revision){
-  var list=document.getElementById('revision-list');
-  if(!revision||!revision.length){
-    list.innerHTML='<div class="empty-state"><span class="empty-icon">&#8635;</span><div class="empty-title">Sin semana anterior</div><div class="empty-sub">La revision aparecera aqui desde la segunda semana de uso.</div></div>';
-    return;
-  }
-  list.innerHTML='';
-
-  // Encabezado
-  var hdr=document.createElement('div');
-  hdr.style.cssText='font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:14px;padding:10px 12px;background:var(--bg);border-radius:var(--r);border:0.5px solid var(--border2);';
-  hdr.textContent='Evaluacion de las posiciones recomendadas la semana anterior basada en el contexto actual del mercado.';
-  list.appendChild(hdr);
-
-  revision.forEach(function(r){
-    var ac=(r.accion||'MANTENER').toUpperCase();
-    var cls=ac==='VENDER'?'vender':ac==='AUMENTAR'?'aumentar':'mantener';
-    var emoji=ac==='VENDER'?'&#9660;':ac==='AUMENTAR'?'&#9650;':'&#9632;';
-    var div=document.createElement('div');
-    div.className='revision-card '+cls;
-    div.innerHTML='<div class="rev-body">'+
-      '<div class="rev-top">'+
-        '<div><div class="rev-ticker">'+escHtml(r.ticker)+'</div><div class="rev-empresa">'+escHtml(r.empresa)+'</div></div>'+
-        '<span class="accion-badge">'+emoji+' '+escHtml(ac)+'</span>'+
-      '</div>'+
-      '<div class="rev-razon">'+escHtml(r.razon)+'</div>'+
-      '<div class="rev-meta">'+
-        (r.variacion&&r.variacion!='N/A'?'<span class="rev-tag">Var. estimada: '+escHtml(r.variacion)+'</span>':'')+
-        '<span class="rev-tag">Confianza: '+escHtml(r.confianza)+'</span>'+
-      '</div>'+
-    '</div>';
-    list.appendChild(div);
-  });
-}
+function renderAll(d){renderAnalysis(d);renderAlerts(d.alertas||[]);}
 
 function renderAnalysis(d){
   var sc=d.sentimiento_general||'MIXTO';
   var cls=sc==='ALCISTA'?'bull':sc==='BAJISTA'?'bear':'mix';
   document.getElementById('mkt-ctx').innerHTML='<div class="mkt-ctx"><span class="sentiment-badge '+cls+'">'+sc+'</span>'+escHtml(d.contexto_mercado)+'</div>';
   document.getElementById('top5-label').style.display='block';
-  var stack=document.getElementById('cards-stack');
-  stack.innerHTML='';
+  var stack=document.getElementById('cards-stack');stack.innerHTML='';
   (d.top5||[]).forEach(function(s){
     var rColor=s.riesgo==='EXTREMO'?'var(--red)':s.riesgo==='MUY ALTO'?'var(--amber)':'var(--text2)';
     var sc2=s.scores||{};
     var rows=[['Momentum',sc2.momentum_tecnico||0],['Fundamentos',sc2.fundamentos||0],['Catalizador',sc2.catalizador_semana||0],['Sentimiento',sc2.sentimiento||0]];
     var card=document.createElement('div');
     card.className='stock-card r'+(s.rank<=3?s.rank:'');
-    card.innerHTML='<div class="sc-body">'+
-      '<div class="sc-top">'+
-        '<div class="sc-left"><div class="rank'+(s.rank<=2?' top':'')+'">#'+s.rank+'</div>'+
-        '<div><div class="ticker">'+escHtml(s.ticker)+'</div><div class="empresa">'+escHtml(s.empresa)+'</div></div></div>'+
-        '<div class="sc-right"><div class="upside">'+escHtml(s.upside_proyectado)+'</div><div class="riesgo-label" style="color:'+rColor+'">'+escHtml(s.riesgo)+'</div></div>'+
-      '</div>'+
-      '<div class="tags"><span class="tag tag-s">'+escHtml(s.tag_sector)+'</span><span class="tag tag-c">'+escHtml(s.tag_catalyst)+'</span><span class="tag tag-r">SL '+escHtml(s.stop_loss_sugerido)+'</span></div>'+
-      rows.map(function(rv){return '<div class="score-row"><span class="score-lbl">'+rv[0]+'</span><div class="score-track"><div class="score-fill" style="width:'+rv[1]+'%"></div></div><span class="score-val">'+rv[1]+'</span></div>';}).join('')+
-      '<div class="rationale"><span class="rationale-title">'+escHtml(s.catalizador_principal)+'</span>'+escHtml(s.rationale)+'</div>'+
-    '</div>';
+    card.innerHTML='<div class="sc-body"><div class="sc-top"><div class="sc-left"><div class="rank'+(s.rank<=2?' top':'')+'">#'+s.rank+'</div><div><div class="ticker">'+escHtml(s.ticker)+'</div><div class="empresa">'+escHtml(s.empresa)+'</div></div></div><div class="sc-right"><div class="upside">'+escHtml(s.upside_proyectado)+'</div><div class="riesgo-label" style="color:'+rColor+'">'+escHtml(s.riesgo)+'</div></div></div><div class="tags"><span class="tag tag-s">'+escHtml(s.tag_sector)+'</span><span class="tag tag-c">'+escHtml(s.tag_catalyst)+'</span><span class="tag tag-r">SL '+escHtml(s.stop_loss_sugerido)+'</span></div>'+rows.map(function(rv){return '<div class="score-row"><span class="score-lbl">'+rv[0]+'</span><div class="score-track"><div class="score-fill" style="width:'+rv[1]+'%"></div></div><span class="score-val">'+rv[1]+'</span></div>';}).join('')+'<div class="rationale"><span class="rationale-title">'+escHtml(s.catalizador_principal)+'</span>'+escHtml(s.rationale)+'</div></div>';
     stack.appendChild(card);
+  });
+}
+
+function renderRevision(revision){
+  var list=document.getElementById('revision-list');
+  if(!revision||!revision.length){list.innerHTML='<div class="empty-state"><span class="empty-icon">&#8635;</span><div class="empty-title">Sin semana anterior</div><div class="empty-sub">La revision aparecera desde la segunda semana.</div></div>';return;}
+  list.innerHTML='<div style="font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:14px;padding:10px 12px;background:var(--bg);border-radius:var(--r);border:0.5px solid var(--border2);">Evaluacion de posiciones de la semana anterior basada en el contexto actual del mercado.</div>';
+  revision.forEach(function(r){
+    var ac=(r.accion||'MANTENER').toUpperCase();
+    var cls=ac==='VENDER'?'vender':ac==='AUMENTAR'?'aumentar':'mantener';
+    var emoji=ac==='VENDER'?'&#9660;':ac==='AUMENTAR'?'&#9650;':'&#9632;';
+    var div=document.createElement('div');div.className='revision-card '+cls;
+    div.innerHTML='<div class="rev-body"><div class="rev-top"><div><div class="rev-ticker">'+escHtml(r.ticker)+'</div><div class="rev-empresa">'+escHtml(r.empresa)+'</div></div><span class="accion-badge">'+emoji+' '+escHtml(ac)+'</span></div><div class="rev-razon">'+escHtml(r.razon)+'</div><div class="rev-meta">'+(r.variacion&&r.variacion!='N/A'?'<span class="rev-tag">Var.: '+escHtml(r.variacion)+'</span>':'')+'<span class="rev-tag">Confianza: '+escHtml(r.confianza)+'</span></div></div>';
+    list.appendChild(div);
   });
 }
 
 function renderAlerts(alerts){
   var list=document.getElementById('alerts-list');
-  if(!alerts.length){
-    list.innerHTML='<div class="empty-state"><span class="empty-icon">&#9711;</span><div class="empty-title">Sin alertas criticas</div><div class="empty-sub">No se detectaron eventos disruptivos esta semana.</div></div>';
-    return;
-  }
+  if(!alerts.length){list.innerHTML='<div class="empty-state"><span class="empty-icon">&#9711;</span><div class="empty-title">Sin alertas</div><div class="empty-sub">No se detectaron eventos disruptivos esta semana.</div></div>';return;}
   list.innerHTML='';
   alerts.forEach(function(a){
     var cls=a.nivel==='CRITICO'||a.nivel==='CRÍTICO'?'critical':a.nivel==='ADVERTENCIA'?'warning':'info';
-    var div=document.createElement('div');
-    div.className='alert-card '+cls;
-    div.innerHTML='<div class="alert-body">'+
-      '<div class="alert-header"><span class="alert-level">'+escHtml(a.nivel)+'</span><span class="alert-title-txt">'+escHtml(a.titulo)+'</span><span class="alert-date">'+escHtml(a.fecha_evento||'Esta semana')+'</span></div>'+
-      '<div class="alert-desc">'+escHtml(a.descripcion)+'</div>'+
-      '<div class="alert-impact">Impacto: '+escHtml(a.impacto)+'</div>'+
-    '</div>';
+    var div=document.createElement('div');div.className='alert-card '+cls;
+    div.innerHTML='<div class="alert-body"><div class="alert-header"><span class="alert-level">'+escHtml(a.nivel)+'</span><span class="alert-title-txt">'+escHtml(a.titulo)+'</span><span class="alert-date">'+escHtml(a.fecha_evento||'Esta semana')+'</span></div><div class="alert-desc">'+escHtml(a.descripcion)+'</div><div class="alert-impact">Impacto: '+escHtml(a.impacto)+'</div></div>';
     list.appendChild(div);
   });
 }
 
-function renderReport(d){
-  var now=new Date();
-  var ds=now.toLocaleDateString('es-CL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  var sep='------------------------------------------';
-  var r='MARKET INTEL - INFORME SEMANAL\n'+ds.toUpperCase()+'\nPerfil: MAXIMO RIESGO\n'+sep+'\n\nCONTEXTO DE MERCADO\n'+d.sentimiento_general+' - '+d.contexto_mercado+'\n\n'+sep+'\nTOP 5 ACCIONES\n'+sep+'\n\n';
-  (d.top5||[]).forEach(function(s){r+='#'+s.rank+' '+s.ticker+' - '+s.empresa+'\nUpside: '+s.upside_proyectado+' | Riesgo: '+s.riesgo+' | SL: '+s.stop_loss_sugerido+'\nCatalizador: '+s.catalizador_principal+'\n'+s.rationale+'\n\n';});
-  if(d.revision&&d.revision.length){
-    r+=sep+'\nREVISION SEMANA ANTERIOR\n'+sep+'\n\n';
-    d.revision.forEach(function(rv){r+=rv.ticker+' - '+rv.empresa+'\nAccion: '+rv.accion+' | Confianza: '+rv.confianza+'\n'+rv.razon+'\n\n';});
-  }
-  r+=sep+'\nALERTAS\n'+sep+'\n\n';
-  (d.alertas||[]).forEach(function(a){r+='['+a.nivel+'] '+a.titulo+' - '+a.fecha_evento+'\n'+a.descripcion+'\nImpacto: '+a.impacto+'\n\n';});
-  r+=sep+'\nNo constituye asesoramiento financiero.';
-  document.getElementById('report-content').innerHTML='<div class="report-box" id="rep-txt">'+escHtml(r)+'</div><button class="btn-secondary" onclick="copyReport()" style="margin-bottom:24px;">Copiar informe completo</button>';
-}
+// ─── GENERADOR PDF DASHBOARD ──────────────────────────────
+function generarPDF(){
+  if(!lastData){alert('No hay datos. Ejecuta el analisis primero.');return;}
+  var btn=document.getElementById('pdf-btn');
+  btn.disabled=true;btn.textContent='Generando PDF...';
 
-function copyReport(){
-  navigator.clipboard.writeText(document.getElementById('rep-txt').textContent).then(function(){
-    var b=document.querySelector('#tab-informe .btn-secondary');
-    var orig=b.textContent;b.textContent='Copiado';
-    setTimeout(function(){b.textContent=orig;},2000);
-  });
+  try{
+    var d=lastData;
+    var jsPDF=window.jspdf.jsPDF;
+    var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    var PW=210,PH=297,M=14,CW=PW-M*2;
+    var y=M;
+
+    // Colores
+    var C={
+      dark:[26,26,26],white:[255,255,255],bg:[245,244,241],bg2:[236,234,229],
+      accent:[29,78,216],green:[22,163,74],red:[220,38,38],amber:[180,83,9],
+      text2:[122,117,112],text3:[176,173,168],border:[220,218,214]
+    };
+
+    function setFill(c){doc.setFillColor(c[0],c[1],c[2]);}
+    function setDraw(c){doc.setDrawColor(c[0],c[1],c[2]);}
+    function setTxt(c){doc.setTextColor(c[0],c[1],c[2]);}
+    function setFont(sz,style){doc.setFontSize(sz);doc.setFont('helvetica',style||'normal');}
+
+    function roundRect(x,y,w,h,r,fill,stroke){
+      doc.roundedRect(x,y,w,h,r,r,fill&&stroke?'FD':fill?'F':stroke?'D':'N');
+    }
+
+    function scoreBar(x,y,w,val,label){
+      setTxt(C.text2);setFont(7);
+      doc.text(label,x,y+2.5);
+      setFill(C.border);doc.rect(x+22,y,w-22-10,2,'F');
+      setFill(C.accent);doc.rect(x+22,y,(w-22-10)*val/100,2,'F');
+      setTxt(C.dark);setFont(7,'bold');
+      doc.text(val+'',x+w-8,y+2.5,'right');
+    }
+
+    function wrapText(txt,maxW,fontSize){
+      setFont(fontSize||9);
+      var words=(txt||'').split(' ');
+      var lines=[],cur='';
+      words.forEach(function(w){
+        var test=cur?cur+' '+w:w;
+        if(doc.getTextWidth(test)<maxW){cur=test;}
+        else{if(cur)lines.push(cur);cur=w;}
+      });
+      if(cur)lines.push(cur);
+      return lines;
+    }
+
+    function checkPage(neededY){
+      if(neededY>PH-20){
+        doc.addPage();
+        y=M;
+        drawPageHeader();
+        return true;
+      }
+      return false;
+    }
+
+    function drawPageHeader(){
+      setFill(C.dark);doc.rect(0,0,PW,10,'F');
+      setTxt(C.white);setFont(7,'bold');
+      doc.text('MARKET INTEL',M,6.5);
+      setTxt(C.text3);setFont(6);
+      doc.text('INFORME SEMANAL  |  PERFIL MAX RISK  |  NO CONSTITUYE ASESORAMIENTO FINANCIERO',M+28,6.5);
+      var fecha=new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'});
+      doc.text(fecha,PW-M,6.5,'right');
+    }
+
+    // ── PORTADA / HEADER PRINCIPAL ──
+    setFill(C.dark);doc.rect(0,0,PW,42,'F');
+    // Logo box
+    setFill(C.accent);roundRect(M,8,14,14,2,true,false);
+    setTxt(C.white);setFont(7,'bold');doc.text('MI',M+7,17,'center');
+    // Titulo
+    setTxt(C.white);setFont(18,'bold');doc.text('Market Intel',M+17,16);
+    setFont(8);setTxt([120,140,200]);doc.text('Informe Semanal  |  Perfil MAX RISK  |  AI-Powered',M+17,22);
+    setTxt(C.text3);setFont(7);doc.text(lastData.fecha_analisis||new Date().toLocaleDateString('es-CL'),M+17,27);
+
+    // Sentimiento badge
+    var sg=d.sentimiento_general||'MIXTO';
+    var sgColor=sg==='ALCISTA'?C.green:sg==='BAJISTA'?C.red:C.amber;
+    setFill(sgColor);roundRect(PW-M-24,10,24,10,2,true,false);
+    setTxt(C.white);setFont(7,'bold');doc.text(sg,PW-M-12,16.5,'center');
+
+    y=44;
+
+    // Contexto de mercado
+    setFill(C.bg);roundRect(M,y,CW,18,2,true,false);
+    setTxt(C.accent);setFont(7,'bold');doc.text('CONTEXTO DE MERCADO',M+4,y+5);
+    var ctxLines=wrapText(d.contexto_mercado||'',CW-8,8);
+    setTxt(C.text2);setFont(8);
+    ctxLines.slice(0,2).forEach(function(l,i){doc.text(l,M+4,y+10+i*4);});
+    y+=22;
+
+    // ── SECCION TOP 5 ──
+    setFill(C.dark);roundRect(M,y,CW,7,1.5,true,false);
+    setTxt(C.white);setFont(8,'bold');doc.text('TOP 5 ACCIONES  |  SEMANA ACTUAL',M+4,y+4.8);
+    y+=10;
+
+    (d.top5||[]).forEach(function(s,idx){
+      var cardH=52;
+      checkPage(y+cardH);
+
+      // Card bg
+      setFill(C.white);setDraw(C.border);
+      doc.setLineWidth(0.3);roundRect(M,y,CW,cardH,2,true,true);
+
+      // Barra lateral coloreada segun rank
+      var barColor=idx===0?C.accent:idx===1?[59,100,200]:idx===2?[100,130,210]:C.text3;
+      setFill(barColor);doc.rect(M,y,2.5,cardH,'F');
+
+      // Rank
+      setTxt(idx<2?C.accent:C.text3);setFont(8,'bold');
+      doc.text('#'+s.rank,M+5,y+6);
+
+      // Ticker y empresa
+      setTxt(C.dark);setFont(13,'bold');doc.text(s.ticker||'',M+13,y+7);
+      setTxt(C.text2);setFont(7);doc.text(s.empresa||'',M+13,y+12);
+
+      // Upside (derecha)
+      setTxt(C.accent);setFont(14,'bold');
+      doc.text(s.upside_proyectado||'',PW-M-4,y+8,'right');
+
+      // Riesgo
+      var rColor=s.riesgo==='EXTREMO'?C.red:s.riesgo==='MUY ALTO'?C.amber:C.text2;
+      setTxt(rColor);setFont(7,'bold');doc.text(s.riesgo||'',PW-M-4,y+13.5,'right');
+
+      // Tags
+      var tagY=y+17;
+      var tags=[s.tag_sector,s.tag_catalyst,'SL '+s.stop_loss_sugerido];
+      var tagX=M+4;
+      tags.forEach(function(t){
+        if(!t)return;
+        var tw=doc.getTextWidth(t)+4;
+        setFill(C.bg);setDraw(C.border);doc.setLineWidth(0.2);
+        doc.roundedRect(tagX,tagY-3,tw,4.5,0.8,0.8,'FD');
+        setTxt(C.text2);setFont(6.5);doc.text(t,tagX+2,tagY);
+        tagX+=tw+2;
+      });
+
+      // Score bars
+      var sc2=s.scores||{};
+      var barW=(CW-8)/2-4;
+      var bx1=M+4,bx2=M+4+barW+6;
+      scoreBar(bx1,y+23,barW,sc2.momentum_tecnico||0,'Momentum');
+      scoreBar(bx2,y+23,barW,sc2.fundamentos||0,'Fundamentos');
+      scoreBar(bx1,y+29,barW,sc2.catalizador_semana||0,'Catalizador');
+      scoreBar(bx2,y+29,barW,sc2.sentimiento||0,'Sentimiento');
+
+      // Catalizador titulo
+      setTxt(C.dark);setFont(7,'bold');
+      doc.text(s.catalizador_principal||'',M+4,y+37);
+
+      // Rationale
+      var ratLines=wrapText(s.rationale||'',CW-8,7.5);
+      setTxt(C.text2);setFont(7.5);
+      ratLines.slice(0,2).forEach(function(l,i){doc.text(l,M+4,y+42+i*4);});
+
+      y+=cardH+4;
+    });
+
+    y+=2;
+
+    // ── SECCION REVISION ──
+    var rev=lastData.revision||[];
+    if(rev&&rev.length){
+      checkPage(y+14);
+      setFill(C.dark);roundRect(M,y,CW,7,1.5,true,false);
+      setTxt(C.white);setFont(8,'bold');doc.text('REVISION SEMANA ANTERIOR  |  MANTENER / AUMENTAR / VENDER',M+4,y+4.8);
+      y+=10;
+
+      rev.forEach(function(r){
+        var ac=(r.accion||'MANTENER').toUpperCase();
+        var acColor=ac==='VENDER'?C.red:ac==='AUMENTAR'?C.accent:C.green;
+        var cardH=22;
+        checkPage(y+cardH);
+
+        setFill(C.white);setDraw(C.border);doc.setLineWidth(0.3);
+        roundRect(M,y,CW,cardH,2,true,true);
+        setFill(acColor);doc.rect(M,y,2.5,cardH,'F');
+
+        // Accion badge
+        setFill(acColor);roundRect(PW-M-22,y+4,22,7,1.5,true,false);
+        setTxt(C.white);setFont(7,'bold');doc.text(ac,PW-M-11,y+8.5,'center');
+
+        // Ticker
+        setTxt(C.dark);setFont(10,'bold');doc.text(r.ticker||'',M+5,y+7);
+        setTxt(C.text2);setFont(7);doc.text(r.empresa||'',M+5,y+12);
+
+        // Razon
+        var rzLines=wrapText(r.razon||'',CW-32,7.5);
+        setTxt(C.text2);setFont(7.5);
+        rzLines.slice(0,2).forEach(function(l,i){doc.text(l,M+4,y+17+i*3.5);});
+
+        // Confianza tag
+        if(r.confianza){
+          setTxt(C.text2);setFont(6.5);
+          doc.text('Confianza: '+r.confianza,PW-M-4,y+18,'right');
+        }
+
+        y+=cardH+3;
+      });
+      y+=2;
+    }
+
+    // ── SECCION ALERTAS ──
+    var alerts=d.alertas||[];
+    if(alerts.length){
+      checkPage(y+14);
+      setFill(C.dark);roundRect(M,y,CW,7,1.5,true,false);
+      setTxt(C.white);setFont(8,'bold');doc.text('ALERTAS DE MERCADO',M+4,y+4.8);
+      y+=10;
+
+      alerts.forEach(function(a){
+        var nv=(a.nivel||'INFO').toUpperCase();
+        var aColor=nv==='CRITICO'||nv==='CRÍTICO'?C.red:nv==='ADVERTENCIA'?C.amber:C.accent;
+        var descLines=wrapText((a.descripcion||'')+' Impacto: '+(a.impacto||''),CW-8,7.5);
+        var cardH=Math.max(20,10+descLines.length*4);
+        checkPage(y+cardH);
+
+        setFill(C.white);setDraw(C.border);doc.setLineWidth(0.3);
+        roundRect(M,y,CW,cardH,2,true,true);
+        setFill(aColor);doc.rect(M,y,2.5,cardH,'F');
+
+        // Badge nivel
+        setFill(aColor);roundRect(M+4,y+3,16,4.5,0.8,true,false);
+        setTxt(C.white);setFont(6,'bold');doc.text(nv.slice(0,9),M+12,y+6,'center');
+
+        // Titulo
+        setTxt(C.dark);setFont(8,'bold');doc.text(a.titulo||'',M+22,y+6.5);
+
+        // Fecha
+        setTxt(C.text2);setFont(6.5);doc.text(a.fecha_evento||'Esta semana',PW-M-4,y+6.5,'right');
+
+        // Descripcion
+        setTxt(C.text2);setFont(7.5);
+        descLines.slice(0,3).forEach(function(l,i){doc.text(l,M+4,y+12+i*4);});
+
+        y+=cardH+3;
+      });
+    }
+
+    // ── FOOTER FINAL ──
+    var totalPages=doc.internal.getNumberOfPages();
+    for(var pg=1;pg<=totalPages;pg++){
+      doc.setPage(pg);
+      setFill(C.bg2);doc.rect(0,PH-8,PW,8,'F');
+      setTxt(C.text3);setFont(6);
+      doc.text('Market Intel  |  Analisis generado por IA  |  No constituye asesoramiento financiero  |  Pagina '+pg+' de '+totalPages,PW/2,PH-3,'center');
+    }
+
+    var fname='MarketIntel_'+new Date().toISOString().slice(0,10)+'.pdf';
+    doc.save(fname);
+
+  }catch(err){
+    alert('Error generando PDF: '+err.message);
+  }finally{
+    var b=document.getElementById('pdf-btn');
+    if(b){b.disabled=false;b.innerHTML='&#128196; Descargar Informe PDF';}
+  }
 }
 
 function escHtml(s){
