@@ -22,12 +22,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 }
 #app{max-width:480px;margin:0 auto;background:var(--bg2);min-height:100vh;}
 .screen{display:none}.screen.active{display:block}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:10;}
+
+.topbar{background:var(--bg);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:10;}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;}
 .topbar-logo{display:flex;align-items:center;gap:10px;}
 .topbar-icon{width:32px;height:32px;background:#1a1a1a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
 .topbar-title{font-size:15px;font-weight:600;letter-spacing:-.3px;}
 .topbar-sub{font-size:11px;color:var(--text2);margin-top:1px;}
 .topbar-right{display:flex;align-items:center;gap:8px;}
+.fecha-bar{display:flex;align-items:center;justify-content:space-between;padding:0 16px 10px;font-size:10px;color:var(--text2);}
+.fecha-bar .label{letter-spacing:.6px;text-transform:uppercase;font-weight:500;}
+.fecha-bar .value{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums;}
+
 .status-pill{display:flex;align-items:center;gap:5px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:20px;padding:5px 10px;}
 .sdot{width:6px;height:6px;border-radius:50%;background:var(--text3);}
 .sdot.ok{background:var(--green);}
@@ -35,22 +41,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sdot.error{background:var(--red);}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
 .stext{font-size:10px;color:var(--text2);letter-spacing:.4px;}
+
 .nav{display:flex;background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 4px;}
 .nav-tab{flex:1;padding:11px 2px;font-size:10px;letter-spacing:.5px;background:none;border:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;font-family:inherit;}
 .nav-tab.active{color:var(--text);border-bottom-color:var(--text);}
 .content{padding:16px;}
+
 .btn-primary{width:100%;padding:14px;font-size:14px;font-weight:600;background:#1a1a1a;color:#fff;border:none;border-radius:var(--rl);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-primary:hover{background:#2d2d2d;}
 .btn-primary:disabled{background:var(--text3);cursor:not-allowed;}
 .btn-pdf{width:100%;padding:13px;font-size:13px;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:var(--r);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:10px;}
 .btn-pdf:hover{background:#1e40af;}
 .btn-pdf:disabled{background:var(--text3);cursor:not-allowed;}
+
 .progress-track{height:2px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:12px;display:none;}
 .progress-track.active{display:block;}
 .progress-fill{height:100%;background:var(--accent);animation:prog 2.5s infinite;}
 @keyframes prog{0%{width:0;margin-left:0}50%{width:55%}100%{width:0;margin-left:100%}}
 .loading-msg{font-size:11px;color:var(--accent);margin-bottom:14px;display:none;}
 .loading-msg.active{display:block;}
+
 .stock-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:10px;overflow:hidden;position:relative;}
 .stock-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--text3);}
 .stock-card.r1::before{background:var(--accent);}
@@ -130,6 +140,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .rev-razon{font-size:11px;color:var(--text2);line-height:1.6;}
 .rev-meta{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;}
 .rev-tag{font-size:10px;padding:2px 7px;border-radius:4px;background:var(--bg2);color:var(--text2);border:0.5px solid var(--border2);}
+.usage-box{font-size:10px;color:var(--text3);text-align:center;padding:8px;background:var(--bg);border-radius:var(--r);margin-bottom:12px;border:0.5px dashed var(--border2);font-variant-numeric:tabular-nums;}
 </style>
 </head>
 <body>
@@ -137,9 +148,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div class="screen active" id="s-config">
     <div class="topbar">
-      <div class="topbar-logo">
-        <div class="topbar-icon">MI</div>
-        <div><div class="topbar-title">Market Intel</div><div class="topbar-sub">Configuracion inicial</div></div>
+      <div class="topbar-row">
+        <div class="topbar-logo">
+          <div class="topbar-icon">MI</div>
+          <div><div class="topbar-title">Market Intel</div><div class="topbar-sub">Configuracion inicial</div></div>
+        </div>
       </div>
     </div>
     <div class="key-wrap">
@@ -157,16 +170,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div class="screen" id="s-main">
     <div class="topbar">
-      <div class="topbar-logo">
-        <div class="topbar-icon">MI</div>
-        <div><div class="topbar-title">Market Intel</div><div class="topbar-sub">MAX RISK - AI-POWERED</div></div>
-      </div>
-      <div class="topbar-right">
-        <div class="status-pill">
-          <div class="sdot" id="sdot"></div>
-          <span class="stext" id="stext">IDLE</span>
+      <div class="topbar-row">
+        <div class="topbar-logo">
+          <div class="topbar-icon">MI</div>
+          <div><div class="topbar-title">Market Intel</div><div class="topbar-sub">MAX RISK - AI-POWERED</div></div>
         </div>
-        <button onclick="go('s-config')" style="font-size:16px;color:var(--text2);background:none;border:none;cursor:pointer;padding:4px;">&#9881;</button>
+        <div class="topbar-right">
+          <div class="status-pill">
+            <div class="sdot" id="sdot"></div>
+            <span class="stext" id="stext">IDLE</span>
+          </div>
+          <button onclick="go('s-config')" style="font-size:16px;color:var(--text2);background:none;border:none;cursor:pointer;padding:4px;">&#9881;</button>
+        </div>
+      </div>
+      <div class="fecha-bar">
+        <span class="label">Analisis</span>
+        <span class="value" id="fecha-header">Sin datos</span>
       </div>
     </div>
     <div class="nav">
@@ -182,6 +201,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="progress-track" id="prog-track"><div class="progress-fill"></div></div>
       <div class="loading-msg" id="load-msg"></div>
       <div class="error-box" id="err-box"></div>
+      <div id="usage-info"></div>
       <div id="mkt-ctx"></div>
       <div class="section-label" id="top5-label" style="display:none">Top 5 acciones - semana actual</div>
       <div id="cards-stack"></div>
@@ -215,12 +235,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-var LS_KEY='market_intel_v5';
-var LS_PREV='market_intel_prev_v5';
+var LS_KEY='market_intel_v6';
+var LS_PREV='market_intel_prev_v6';
 var LS_API='market_intel_key';
 var apiKey='';
 var lastData=null;
 var prevData=null;
+
+// ─── SISTEMA: instruccion estable, candidata a prompt caching ───
+var SYSTEM_PROMPT='Eres un analista financiero cuantitativo senior especializado en renta variable global con perfil de riesgo MAXIMO. Tu trabajo: generar recomendaciones semanales accionables para un cliente que acepta volatilidad extrema (small caps, biotech especulativo, semiconductores AI, crypto-adjacent, leverage plays).\n\nREGLAS ESTRICTAS:\n1. Solo usa tickers REALES cotizados en NYSE/NASDAQ/AMEX. Verifica con web_search si dudas.\n2. Prioriza acciones con catalizadores CONCRETOS y CON FECHA en los proximos 7 dias (earnings reports, decisiones FDA, reuniones Fed, lanzamientos, datos macro).\n3. Evita acciones meme sin fundamento, penny stocks bajo USD 1, y empresas en proceso de delisting.\n4. Scores 0-100: momentum_tecnico (precio vs MA50/MA200, RSI), fundamentos (revenue growth, margenes), catalizador_semana (proximidad e impacto del evento), sentimiento (analyst ratings, flujos).\n5. Stop loss debe ser proporcional al riesgo: ALTO 5-10%, MUY ALTO 10-15%, EXTREMO 15-25%.\n6. Rationale: 2-3 frases con datos concretos (revenue YoY, EPS estimate, precio actual).\n7. Para revision semana anterior: AUMENTAR solo si el catalizador se fortalecio, VENDER si ya se consumio o se invirtio, MANTENER si tesis original sigue intacta.\n8. Responde SIEMPRE solo con JSON valido. Nunca markdown, nunca texto adicional.\n9. Usa exactamente las claves cortas definidas en el esquema.';
+
+// ─── ESQUEMA: compacto, un ejemplo, replica para 5 ───
+var SCHEMA_TEMPLATE='{"cm":"<2 frases con SP500/Nasdaq/VIX numericos>","sg":"<ALCISTA|BAJISTA|MIXTO>","fd":"<fecha>","t5":[{"r":1,"tk":"<ticker NYSE/NASDAQ>","em":"<empresa>","sc":"<sector>","up":"<+X%>","cat":"<catalizador con fecha exacta>","rat":"<2-3 frases con datos>","mt":<0-100>,"mf":<0-100>,"mc":<0-100>,"ms":<0-100>,"ts":"<tag sector>","tc":"<tag catalizador>","ri":"<ALTO|MUY ALTO|EXTREMO>","sl":"<-X%>"}],"al":[{"nv":"<CRITICO|ADVERTENCIA|INFO>","ti":"<titulo>","de":"<descripcion>","im":"<impacto>","fe":"<fecha>"}],"rv":[{"tk":"<ticker>","em":"<empresa>","ac":"<MANTENER|AUMENTAR|VENDER>","rz":"<razon basada en contexto actual>","var":"<+X%>","conf":"<ALTA|MEDIA|BAJA>"}]}';
 
 window.addEventListener('DOMContentLoaded',function(){
   apiKey=localStorage.getItem(LS_API)||'';
@@ -228,10 +254,16 @@ window.addEventListener('DOMContentLoaded',function(){
   try{var p=localStorage.getItem(LS_PREV);if(p)prevData=JSON.parse(p);}catch(e){}
   if(apiKey){
     go('s-main');
-    if(lastData){renderAll(lastData);showPdfBtn();}
+    if(lastData){renderAll(lastData);showPdfBtn();updateFechaHeader();}
     if(prevData&&prevData.revision)renderRevision(prevData.revision);
   } else go('s-config');
 });
+
+function updateFechaHeader(){
+  var el=document.getElementById('fecha-header');
+  if(lastData&&lastData.fecha_analisis)el.textContent=lastData.fecha_analisis;
+  else el.textContent='Sin datos';
+}
 
 function go(id){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
@@ -250,43 +282,29 @@ function switchTab(tab){
 function guardarKey(){
   var val=document.getElementById('api-key-input').value.trim();
   var err=document.getElementById('key-error');
-  if(!val.startsWith('sk-ant-')){
-    err.textContent='La API Key debe comenzar con sk-ant-';
-    err.classList.add('active');return;
-  }
+  if(!val.startsWith('sk-ant-')){err.textContent='La API Key debe comenzar con sk-ant-';err.classList.add('active');return;}
   err.classList.remove('active');
-  apiKey=val;
-  localStorage.setItem(LS_API,apiKey);
-  go('s-main');
+  apiKey=val;localStorage.setItem(LS_API,apiKey);go('s-main');
 }
 
 function setStatus(txt,state){
   document.getElementById('stext').textContent=txt;
-  var d=document.getElementById('sdot');
-  d.className='sdot'+(state?' '+state:'');
+  var d=document.getElementById('sdot');d.className='sdot'+(state?' '+state:'');
 }
 function setMsg(txt){
   var m=document.getElementById('load-msg');
-  m.textContent=txt;
-  m.className='loading-msg'+(txt?' active':'');
+  m.textContent=txt;m.className='loading-msg'+(txt?' active':'');
 }
 function showErr(txt){
   var e=document.getElementById('err-box');
-  e.textContent=txt?txt:'';
-  e.className='error-box'+(txt?' active':'');
+  e.textContent=txt?txt:'';e.className='error-box'+(txt?' active':'');
 }
-
 function showPdfBtn(){
-  document.getElementById('informe-state').innerHTML=
-    '<div style="padding:4px 0 16px;">' +
-    '<button class="btn-pdf" id="pdf-btn" onclick="generarPDF()">&#128196; Descargar Informe PDF</button>'+
-    '<div style="font-size:11px;color:var(--text2);text-align:center;line-height:1.7;">Incluye Top 5, Revision y Alertas<br>en formato dashboard profesional</div>'+
-    '</div>';
+  document.getElementById('informe-state').innerHTML='<div style="padding:4px 0 16px;"><button class="btn-pdf" id="pdf-btn" onclick="generarPDF()">&#128196; Descargar Informe PDF</button><div style="font-size:11px;color:var(--text2);text-align:center;line-height:1.7;">Incluye Top 5, Revision y Alertas<br>en formato dashboard profesional</div></div>';
 }
 
 function fixJson(str){
-  var start=str.indexOf('{');
-  if(start<0)return null;
+  var start=str.indexOf('{');if(start<0)return null;
   str=str.slice(start);
   var depth=0,adepth=0;
   for(var i=0;i<str.length;i++){
@@ -301,59 +319,106 @@ function fixJson(str){
   return str;
 }
 
+function showUsage(usage){
+  if(!usage)return;
+  var inT=usage.input_tokens||0;
+  var outT=usage.output_tokens||0;
+  var cachedR=usage.cache_read_input_tokens||0;
+  var cachedC=usage.cache_creation_input_tokens||0;
+  // Pricing sonnet 4.5: $3/MTok input, $15/MTok output, $0.30/MTok cached read, $3.75/MTok cache write
+  var cost=(inT*3+outT*15+cachedR*0.30+cachedC*3.75)/1000000;
+  var msg='Costo: USD '+cost.toFixed(4)+'  -  '+inT+' in / '+outT+' out';
+  if(cachedR>0)msg+=' / '+cachedR+' cache hit';
+  document.getElementById('usage-info').innerHTML='<div class="usage-box">'+msg+'</div>';
+}
+
 async function runAnalysis(){
   var btn=document.getElementById('analyze-btn');
   var prog=document.getElementById('prog-track');
   btn.disabled=true;prog.classList.add('active');
   showErr('');setStatus('ANALIZANDO','loading');
-  var steps=['> conectando con mercados...','> buscando datos actuales...','> analizando earnings y catalizadores...','> evaluando posiciones anteriores...','> generando recomendaciones...'];
+  document.getElementById('usage-info').innerHTML='';
+
+  var steps=['> conectando mercados...','> buscando datos actuales (max 3 fuentes)...','> analizando catalizadores con fecha...','> evaluando posiciones anteriores...','> generando JSON estructurado...'];
   var si=0;setMsg(steps[0]);
   var iv=setInterval(function(){if(si<steps.length-1)setMsg(steps[++si]);},1800);
+
   var today=new Date().toLocaleDateString('es-CL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  // Contexto de revision compacto (solo lo esencial)
   var prevContext='';
   if(lastData&&lastData.top5&&lastData.top5.length){
-    var fechaPrev=lastData.fecha_analisis||'semana anterior';
-    prevContext='\n\nACCIONES SEMANA ANTERIOR ('+fechaPrev+'):\n';
-    lastData.top5.forEach(function(s){prevContext+='- '+s.ticker+' ('+s.empresa+'): upside '+s.upside_proyectado+', catalizador: '+s.catalizador_principal+'\n';});
-    prevContext+='\nEvalua cada una: MANTENER, AUMENTAR o VENDER segun contexto actual.';
+    var prevList=lastData.top5.map(function(s){
+      return s.ticker+'('+s.upside_proyectado+',cat:'+truncate(s.catalizador_principal,40)+')';
+    }).join(', ');
+    prevContext='\n\nSEMANA ANTERIOR ('+(lastData.fecha_analisis||'')+'): '+prevList+'\nEvalua cada uno en "rv": MANTENER/AUMENTAR/VENDER segun contexto actual.';
   }
-  var prompt='Fecha: '+today+'\n\nEres analista financiero cuantitativo con perfil de riesgo MAXIMO.\n\nBusca en internet informacion actual sobre el mercado esta semana y genera el analisis completo.'+prevContext+'\n\nResponde SOLO con este JSON (sin texto antes ni despues, sin markdown):\n\n{"cm":"contexto mercado 2 frases con valores reales de SP500 Nasdaq VIX","sg":"ALCISTA","fd":"'+today+'","t5":[{"r":1,"tk":"TICK","em":"Empresa","sc":"Tech","up":"+15%","cat":"catalizador esta semana","rat":"justificacion breve con datos","mt":85,"mf":70,"mc":90,"ms":80,"ts":"Tech","tc":"Earnings","ri":"MUY ALTO","sl":"-8%"},{"r":2,"tk":"TICK","em":"Empresa","sc":"Biotech","up":"+20%","cat":"catalizador","rat":"justificacion","mt":80,"mf":65,"mc":88,"ms":75,"ts":"Biotech","tc":"FDA","ri":"EXTREMO","sl":"-15%"},{"r":3,"tk":"TICK","em":"Empresa","sc":"Semis","up":"+12%","cat":"catalizador","rat":"justificacion","mt":75,"mf":70,"mc":80,"ms":70,"ts":"Semis","tc":"Producto","ri":"ALTO","sl":"-7%"},{"r":4,"tk":"TICK","em":"Empresa","sc":"Crypto","up":"+18%","cat":"catalizador","rat":"justificacion","mt":72,"mf":65,"mc":78,"ms":68,"ts":"Crypto","tc":"Regulacion","ri":"EXTREMO","sl":"-15%"},{"r":5,"tk":"TICK","em":"Empresa","sc":"Energy","up":"+10%","cat":"catalizador","rat":"justificacion","mt":70,"mf":65,"mc":75,"ms":62,"ts":"Energy","tc":"MA","ri":"ALTO","sl":"-8%"}],"al":[{"nv":"CRITICO","ti":"titulo","de":"descripcion detallada del evento","im":"impacto en mercados","fe":"fecha"},{"nv":"ADVERTENCIA","ti":"titulo","de":"descripcion","im":"impacto","fe":"fecha"},{"nv":"INFO","ti":"titulo","de":"descripcion","im":"impacto","fe":"fecha"}],"rv":[{"tk":"TICK","em":"Empresa","ac":"MANTENER","rz":"razon concreta basada en contexto actual","var":"+X%","conf":"ALTA"}]}';
+
+  // Prompt usuario: minimo, solo datos variables
+  var userPrompt='Fecha hoy: '+today+'.\n\nBusca web (max 3 fuentes) datos actuales: SP500/Nasdaq/VIX, earnings esta semana, eventos macro (Fed/CPI/NFP). Genera 5 acciones MAX RISK con catalizador esta semana.'+prevContext+'\n\nRESPONDE SOLO JSON con este esquema (5 elementos en t5, 2-3 en al, '+(lastData?'5':'0')+' en rv):\n'+SCHEMA_TEMPLATE;
+
   try{
+    var body={
+      model:'claude-sonnet-4-6',
+      max_tokens:2500,
+      // System como bloque cacheable
+      system:[{
+        type:'text',
+        text:SYSTEM_PROMPT,
+        cache_control:{type:'ephemeral'}
+      }],
+      tools:[{type:'web_search_20250305',name:'web_search',max_uses:3}],
+      messages:[{role:'user',content:userPrompt}]
+    };
+
     var res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:4000,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]})
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':apiKey,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify(body)
     });
     clearInterval(iv);
+
     if(!res.ok){
       var txt=await res.text();
-      if(res.status===401)throw new Error('API Key invalida. Ve a configuracion.');
-      if(res.status===429)throw new Error('Rate limit. Espera 2 minutos y reintenta.');
-      throw new Error('Error API '+res.status+'. Reintenta.');
+      if(res.status===401)throw new Error('API Key invalida.');
+      if(res.status===429)throw new Error('Rate limit. Espera 2 min.');
+      throw new Error('Error API '+res.status);
     }
+
     var data=await res.json();
+    showUsage(data.usage);
+
     var raw=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
     raw=raw.replace(/```json|```/g,'').trim();
     var fixed=fixJson(raw);
     if(!fixed)throw new Error('Sin respuesta. Reintenta.');
-    var d;
-    try{d=JSON.parse(fixed);}catch(pe){throw new Error('Error procesando respuesta. Reintenta.');}
+
+    var d;try{d=JSON.parse(fixed);}catch(pe){throw new Error('JSON malformado. Reintenta.');}
     var norm=normalizeData(d);
     if(!norm.top5||!norm.top5.length)throw new Error('Datos incompletos. Reintenta.');
+
     if(lastData){
       var prevToSave={fecha:lastData.fecha_analisis||today,top5:lastData.top5};
       if(norm.revision&&norm.revision.length)prevToSave.revision=norm.revision;
       localStorage.setItem(LS_PREV,JSON.stringify(prevToSave));
       prevData=prevToSave;
     }
+
     lastData=norm;
     localStorage.setItem(LS_KEY,JSON.stringify(norm));
     renderAll(norm);
     if(norm.revision&&norm.revision.length)renderRevision(norm.revision);
     showPdfBtn();
+    updateFechaHeader();
     setStatus('LIVE','ok');
     var now=new Date();
     document.getElementById('footer-txt').textContent='Actualizado '+now.toLocaleDateString('es-CL')+' - '+now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+
   }catch(e){
     clearInterval(iv);setStatus('ERROR','error');showErr(e.message);
   }finally{
@@ -361,6 +426,8 @@ async function runAnalysis(){
     setTimeout(function(){setMsg('');},3000);
   }
 }
+
+function truncate(s,n){if(!s)return'';return s.length>n?s.slice(0,n)+'...':s;}
 
 function normalizeData(d){
   var out={};
@@ -421,96 +488,37 @@ function renderAlerts(alerts){
   });
 }
 
-// ─── GENERADOR PDF DASHBOARD ──────────────────────────────
 function generarPDF(){
   if(!lastData){alert('No hay datos. Ejecuta el analisis primero.');return;}
   var btn=document.getElementById('pdf-btn');
   btn.disabled=true;btn.textContent='Generando PDF...';
-
   try{
     var d=lastData;
     var jsPDF=window.jspdf.jsPDF;
     var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-    var PW=210,PH=297,M=14,CW=PW-M*2;
-    var y=M;
-
-    // Colores
-    var C={
-      dark:[26,26,26],white:[255,255,255],bg:[245,244,241],bg2:[236,234,229],
-      accent:[29,78,216],green:[22,163,74],red:[220,38,38],amber:[180,83,9],
-      text2:[122,117,112],text3:[176,173,168],border:[220,218,214]
-    };
-
+    var PW=210,PH=297,M=14,CW=PW-M*2;var y=M;
+    var C={dark:[26,26,26],white:[255,255,255],bg:[245,244,241],bg2:[236,234,229],accent:[29,78,216],green:[22,163,74],red:[220,38,38],amber:[180,83,9],text2:[122,117,112],text3:[176,173,168],border:[220,218,214]};
     function setFill(c){doc.setFillColor(c[0],c[1],c[2]);}
     function setDraw(c){doc.setDrawColor(c[0],c[1],c[2]);}
     function setTxt(c){doc.setTextColor(c[0],c[1],c[2]);}
     function setFont(sz,style){doc.setFontSize(sz);doc.setFont('helvetica',style||'normal');}
+    function roundRect(x,y,w,h,r,fill,stroke){doc.roundedRect(x,y,w,h,r,r,fill&&stroke?'FD':fill?'F':stroke?'D':'N');}
+    function scoreBar(x,y,w,val,label){setTxt(C.text2);setFont(7);doc.text(label,x,y+2.5);setFill(C.border);doc.rect(x+22,y,w-22-10,2,'F');setFill(C.accent);doc.rect(x+22,y,(w-22-10)*val/100,2,'F');setTxt(C.dark);setFont(7,'bold');doc.text(val+'',x+w-8,y+2.5,'right');}
+    function wrapText(txt,maxW,fontSize){setFont(fontSize||9);var words=(txt||'').split(' ');var lines=[],cur='';words.forEach(function(w){var test=cur?cur+' '+w:w;if(doc.getTextWidth(test)<maxW){cur=test;}else{if(cur)lines.push(cur);cur=w;}});if(cur)lines.push(cur);return lines;}
+    function checkPage(neededY){if(neededY>PH-20){doc.addPage();y=M;return true;}return false;}
 
-    function roundRect(x,y,w,h,r,fill,stroke){
-      doc.roundedRect(x,y,w,h,r,r,fill&&stroke?'FD':fill?'F':stroke?'D':'N');
-    }
-
-    function scoreBar(x,y,w,val,label){
-      setTxt(C.text2);setFont(7);
-      doc.text(label,x,y+2.5);
-      setFill(C.border);doc.rect(x+22,y,w-22-10,2,'F');
-      setFill(C.accent);doc.rect(x+22,y,(w-22-10)*val/100,2,'F');
-      setTxt(C.dark);setFont(7,'bold');
-      doc.text(val+'',x+w-8,y+2.5,'right');
-    }
-
-    function wrapText(txt,maxW,fontSize){
-      setFont(fontSize||9);
-      var words=(txt||'').split(' ');
-      var lines=[],cur='';
-      words.forEach(function(w){
-        var test=cur?cur+' '+w:w;
-        if(doc.getTextWidth(test)<maxW){cur=test;}
-        else{if(cur)lines.push(cur);cur=w;}
-      });
-      if(cur)lines.push(cur);
-      return lines;
-    }
-
-    function checkPage(neededY){
-      if(neededY>PH-20){
-        doc.addPage();
-        y=M;
-        drawPageHeader();
-        return true;
-      }
-      return false;
-    }
-
-    function drawPageHeader(){
-      setFill(C.dark);doc.rect(0,0,PW,10,'F');
-      setTxt(C.white);setFont(7,'bold');
-      doc.text('MARKET INTEL',M,6.5);
-      setTxt(C.text3);setFont(6);
-      doc.text('INFORME SEMANAL  |  PERFIL MAX RISK  |  NO CONSTITUYE ASESORAMIENTO FINANCIERO',M+28,6.5);
-      var fecha=new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'});
-      doc.text(fecha,PW-M,6.5,'right');
-    }
-
-    // ── PORTADA / HEADER PRINCIPAL ──
     setFill(C.dark);doc.rect(0,0,PW,42,'F');
-    // Logo box
     setFill(C.accent);roundRect(M,8,14,14,2,true,false);
     setTxt(C.white);setFont(7,'bold');doc.text('MI',M+7,17,'center');
-    // Titulo
     setTxt(C.white);setFont(18,'bold');doc.text('Market Intel',M+17,16);
     setFont(8);setTxt([120,140,200]);doc.text('Informe Semanal  |  Perfil MAX RISK  |  AI-Powered',M+17,22);
     setTxt(C.text3);setFont(7);doc.text(lastData.fecha_analisis||new Date().toLocaleDateString('es-CL'),M+17,27);
-
-    // Sentimiento badge
     var sg=d.sentimiento_general||'MIXTO';
     var sgColor=sg==='ALCISTA'?C.green:sg==='BAJISTA'?C.red:C.amber;
     setFill(sgColor);roundRect(PW-M-24,10,24,10,2,true,false);
     setTxt(C.white);setFont(7,'bold');doc.text(sg,PW-M-12,16.5,'center');
-
     y=44;
 
-    // Contexto de mercado
     setFill(C.bg);roundRect(M,y,CW,18,2,true,false);
     setTxt(C.accent);setFont(7,'bold');doc.text('CONTEXTO DE MERCADO',M+4,y+5);
     var ctxLines=wrapText(d.contexto_mercado||'',CW-8,8);
@@ -518,155 +526,83 @@ function generarPDF(){
     ctxLines.slice(0,2).forEach(function(l,i){doc.text(l,M+4,y+10+i*4);});
     y+=22;
 
-    // ── SECCION TOP 5 ──
     setFill(C.dark);roundRect(M,y,CW,7,1.5,true,false);
     setTxt(C.white);setFont(8,'bold');doc.text('TOP 5 ACCIONES  |  SEMANA ACTUAL',M+4,y+4.8);
     y+=10;
 
     (d.top5||[]).forEach(function(s,idx){
-      var cardH=52;
-      checkPage(y+cardH);
-
-      // Card bg
-      setFill(C.white);setDraw(C.border);
-      doc.setLineWidth(0.3);roundRect(M,y,CW,cardH,2,true,true);
-
-      // Barra lateral coloreada segun rank
+      var cardH=52;checkPage(y+cardH);
+      setFill(C.white);setDraw(C.border);doc.setLineWidth(0.3);roundRect(M,y,CW,cardH,2,true,true);
       var barColor=idx===0?C.accent:idx===1?[59,100,200]:idx===2?[100,130,210]:C.text3;
       setFill(barColor);doc.rect(M,y,2.5,cardH,'F');
-
-      // Rank
-      setTxt(idx<2?C.accent:C.text3);setFont(8,'bold');
-      doc.text('#'+s.rank,M+5,y+6);
-
-      // Ticker y empresa
+      setTxt(idx<2?C.accent:C.text3);setFont(8,'bold');doc.text('#'+s.rank,M+5,y+6);
       setTxt(C.dark);setFont(13,'bold');doc.text(s.ticker||'',M+13,y+7);
       setTxt(C.text2);setFont(7);doc.text(s.empresa||'',M+13,y+12);
-
-      // Upside (derecha)
-      setTxt(C.accent);setFont(14,'bold');
-      doc.text(s.upside_proyectado||'',PW-M-4,y+8,'right');
-
-      // Riesgo
+      setTxt(C.accent);setFont(14,'bold');doc.text(s.upside_proyectado||'',PW-M-4,y+8,'right');
       var rColor=s.riesgo==='EXTREMO'?C.red:s.riesgo==='MUY ALTO'?C.amber:C.text2;
       setTxt(rColor);setFont(7,'bold');doc.text(s.riesgo||'',PW-M-4,y+13.5,'right');
-
-      // Tags
-      var tagY=y+17;
-      var tags=[s.tag_sector,s.tag_catalyst,'SL '+s.stop_loss_sugerido];
-      var tagX=M+4;
-      tags.forEach(function(t){
-        if(!t)return;
-        var tw=doc.getTextWidth(t)+4;
-        setFill(C.bg);setDraw(C.border);doc.setLineWidth(0.2);
-        doc.roundedRect(tagX,tagY-3,tw,4.5,0.8,0.8,'FD');
-        setTxt(C.text2);setFont(6.5);doc.text(t,tagX+2,tagY);
-        tagX+=tw+2;
-      });
-
-      // Score bars
+      var tagY=y+17;var tags=[s.tag_sector,s.tag_catalyst,'SL '+s.stop_loss_sugerido];var tagX=M+4;
+      tags.forEach(function(t){if(!t)return;var tw=doc.getTextWidth(t)+4;setFill(C.bg);setDraw(C.border);doc.setLineWidth(0.2);doc.roundedRect(tagX,tagY-3,tw,4.5,0.8,0.8,'FD');setTxt(C.text2);setFont(6.5);doc.text(t,tagX+2,tagY);tagX+=tw+2;});
       var sc2=s.scores||{};
-      var barW=(CW-8)/2-4;
-      var bx1=M+4,bx2=M+4+barW+6;
+      var barW=(CW-8)/2-4;var bx1=M+4,bx2=M+4+barW+6;
       scoreBar(bx1,y+23,barW,sc2.momentum_tecnico||0,'Momentum');
       scoreBar(bx2,y+23,barW,sc2.fundamentos||0,'Fundamentos');
       scoreBar(bx1,y+29,barW,sc2.catalizador_semana||0,'Catalizador');
       scoreBar(bx2,y+29,barW,sc2.sentimiento||0,'Sentimiento');
-
-      // Catalizador titulo
-      setTxt(C.dark);setFont(7,'bold');
-      doc.text(s.catalizador_principal||'',M+4,y+37);
-
-      // Rationale
+      setTxt(C.dark);setFont(7,'bold');doc.text(s.catalizador_principal||'',M+4,y+37);
       var ratLines=wrapText(s.rationale||'',CW-8,7.5);
-      setTxt(C.text2);setFont(7.5);
-      ratLines.slice(0,2).forEach(function(l,i){doc.text(l,M+4,y+42+i*4);});
-
+      setTxt(C.text2);setFont(7.5);ratLines.slice(0,2).forEach(function(l,i){doc.text(l,M+4,y+42+i*4);});
       y+=cardH+4;
     });
-
     y+=2;
 
-    // ── SECCION REVISION ──
     var rev=lastData.revision||[];
     if(rev&&rev.length){
       checkPage(y+14);
       setFill(C.dark);roundRect(M,y,CW,7,1.5,true,false);
       setTxt(C.white);setFont(8,'bold');doc.text('REVISION SEMANA ANTERIOR  |  MANTENER / AUMENTAR / VENDER',M+4,y+4.8);
       y+=10;
-
       rev.forEach(function(r){
         var ac=(r.accion||'MANTENER').toUpperCase();
         var acColor=ac==='VENDER'?C.red:ac==='AUMENTAR'?C.accent:C.green;
-        var cardH=22;
-        checkPage(y+cardH);
-
-        setFill(C.white);setDraw(C.border);doc.setLineWidth(0.3);
-        roundRect(M,y,CW,cardH,2,true,true);
+        var cardH=22;checkPage(y+cardH);
+        setFill(C.white);setDraw(C.border);doc.setLineWidth(0.3);roundRect(M,y,CW,cardH,2,true,true);
         setFill(acColor);doc.rect(M,y,2.5,cardH,'F');
-
-        // Accion badge
         setFill(acColor);roundRect(PW-M-22,y+4,22,7,1.5,true,false);
         setTxt(C.white);setFont(7,'bold');doc.text(ac,PW-M-11,y+8.5,'center');
-
-        // Ticker
         setTxt(C.dark);setFont(10,'bold');doc.text(r.ticker||'',M+5,y+7);
         setTxt(C.text2);setFont(7);doc.text(r.empresa||'',M+5,y+12);
-
-        // Razon
         var rzLines=wrapText(r.razon||'',CW-32,7.5);
-        setTxt(C.text2);setFont(7.5);
-        rzLines.slice(0,2).forEach(function(l,i){doc.text(l,M+4,y+17+i*3.5);});
-
-        // Confianza tag
-        if(r.confianza){
-          setTxt(C.text2);setFont(6.5);
-          doc.text('Confianza: '+r.confianza,PW-M-4,y+18,'right');
-        }
-
+        setTxt(C.text2);setFont(7.5);rzLines.slice(0,2).forEach(function(l,i){doc.text(l,M+4,y+17+i*3.5);});
+        if(r.confianza){setTxt(C.text2);setFont(6.5);doc.text('Confianza: '+r.confianza,PW-M-4,y+18,'right');}
         y+=cardH+3;
       });
       y+=2;
     }
 
-    // ── SECCION ALERTAS ──
     var alerts=d.alertas||[];
     if(alerts.length){
       checkPage(y+14);
       setFill(C.dark);roundRect(M,y,CW,7,1.5,true,false);
       setTxt(C.white);setFont(8,'bold');doc.text('ALERTAS DE MERCADO',M+4,y+4.8);
       y+=10;
-
       alerts.forEach(function(a){
         var nv=(a.nivel||'INFO').toUpperCase();
         var aColor=nv==='CRITICO'||nv==='CRÍTICO'?C.red:nv==='ADVERTENCIA'?C.amber:C.accent;
         var descLines=wrapText((a.descripcion||'')+' Impacto: '+(a.impacto||''),CW-8,7.5);
         var cardH=Math.max(20,10+descLines.length*4);
         checkPage(y+cardH);
-
-        setFill(C.white);setDraw(C.border);doc.setLineWidth(0.3);
-        roundRect(M,y,CW,cardH,2,true,true);
+        setFill(C.white);setDraw(C.border);doc.setLineWidth(0.3);roundRect(M,y,CW,cardH,2,true,true);
         setFill(aColor);doc.rect(M,y,2.5,cardH,'F');
-
-        // Badge nivel
         setFill(aColor);roundRect(M+4,y+3,16,4.5,0.8,true,false);
         setTxt(C.white);setFont(6,'bold');doc.text(nv.slice(0,9),M+12,y+6,'center');
-
-        // Titulo
         setTxt(C.dark);setFont(8,'bold');doc.text(a.titulo||'',M+22,y+6.5);
-
-        // Fecha
         setTxt(C.text2);setFont(6.5);doc.text(a.fecha_evento||'Esta semana',PW-M-4,y+6.5,'right');
-
-        // Descripcion
-        setTxt(C.text2);setFont(7.5);
-        descLines.slice(0,3).forEach(function(l,i){doc.text(l,M+4,y+12+i*4);});
-
+        setTxt(C.text2);setFont(7.5);descLines.slice(0,3).forEach(function(l,i){doc.text(l,M+4,y+12+i*4);});
         y+=cardH+3;
       });
     }
 
-    // ── FOOTER FINAL ──
     var totalPages=doc.internal.getNumberOfPages();
     for(var pg=1;pg<=totalPages;pg++){
       doc.setPage(pg);
@@ -674,22 +610,13 @@ function generarPDF(){
       setTxt(C.text3);setFont(6);
       doc.text('Market Intel  |  Analisis generado por IA  |  No constituye asesoramiento financiero  |  Pagina '+pg+' de '+totalPages,PW/2,PH-3,'center');
     }
-
     var fname='MarketIntel_'+new Date().toISOString().slice(0,10)+'.pdf';
     doc.save(fname);
-
-  }catch(err){
-    alert('Error generando PDF: '+err.message);
-  }finally{
-    var b=document.getElementById('pdf-btn');
-    if(b){b.disabled=false;b.innerHTML='&#128196; Descargar Informe PDF';}
-  }
+  }catch(err){alert('Error generando PDF: '+err.message);}
+  finally{var b=document.getElementById('pdf-btn');if(b){b.disabled=false;b.innerHTML='&#128196; Descargar Informe PDF';}}
 }
 
-function escHtml(s){
-  if(!s)return'';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function escHtml(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 </script>
 </body>
 </html>
