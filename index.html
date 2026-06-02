@@ -22,7 +22,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 }
 #app{max-width:480px;margin:0 auto;background:var(--bg2);min-height:100vh;}
 .screen{display:none}.screen.active{display:block}
-
 .topbar{background:var(--bg);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:10;}
 .topbar-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;}
 .topbar-logo{display:flex;align-items:center;gap:10px;}
@@ -33,7 +32,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fecha-bar{display:flex;align-items:center;justify-content:space-between;padding:0 16px 10px;font-size:10px;color:var(--text2);}
 .fecha-bar .label{letter-spacing:.6px;text-transform:uppercase;font-weight:500;}
 .fecha-bar .value{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums;}
-
 .status-pill{display:flex;align-items:center;gap:5px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:20px;padding:5px 10px;}
 .sdot{width:6px;height:6px;border-radius:50%;background:var(--text3);}
 .sdot.ok{background:var(--green);}
@@ -41,26 +39,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sdot.error{background:var(--red);}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
 .stext{font-size:10px;color:var(--text2);letter-spacing:.4px;}
-
 .nav{display:flex;background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 4px;}
 .nav-tab{flex:1;padding:11px 2px;font-size:10px;letter-spacing:.5px;background:none;border:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;font-family:inherit;}
 .nav-tab.active{color:var(--text);border-bottom-color:var(--text);}
 .content{padding:16px;}
-
 .btn-primary{width:100%;padding:14px;font-size:14px;font-weight:600;background:#1a1a1a;color:#fff;border:none;border-radius:var(--rl);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-primary:hover{background:#2d2d2d;}
 .btn-primary:disabled{background:var(--text3);cursor:not-allowed;}
 .btn-pdf{width:100%;padding:13px;font-size:13px;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:var(--r);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:10px;}
 .btn-pdf:hover{background:#1e40af;}
 .btn-pdf:disabled{background:var(--text3);cursor:not-allowed;}
-
 .progress-track{height:2px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:12px;display:none;}
 .progress-track.active{display:block;}
 .progress-fill{height:100%;background:var(--accent);animation:prog 2.5s infinite;}
 @keyframes prog{0%{width:0;margin-left:0}50%{width:55%}100%{width:0;margin-left:100%}}
 .loading-msg{font-size:11px;color:var(--accent);margin-bottom:14px;display:none;}
 .loading-msg.active{display:block;}
-
 .stock-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:10px;overflow:hidden;position:relative;}
 .stock-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--text3);}
 .stock-card.r1::before{background:var(--accent);}
@@ -141,6 +135,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .rev-meta{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;}
 .rev-tag{font-size:10px;padding:2px 7px;border-radius:4px;background:var(--bg2);color:var(--text2);border:0.5px solid var(--border2);}
 .usage-box{font-size:10px;color:var(--text3);text-align:center;padding:8px;background:var(--bg);border-radius:var(--r);margin-bottom:12px;border:0.5px dashed var(--border2);font-variant-numeric:tabular-nums;}
+.retry-info{font-size:11px;color:var(--accent);text-align:center;padding:8px;margin-bottom:10px;background:var(--accent-bg);border-radius:var(--r);display:none;}
+.retry-info.active{display:block;}
 </style>
 </head>
 <body>
@@ -200,6 +196,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="btn-primary" id="analyze-btn" onclick="runAnalysis()"><span>&#9889;</span> Analizar mercado esta semana</button>
       <div class="progress-track" id="prog-track"><div class="progress-fill"></div></div>
       <div class="loading-msg" id="load-msg"></div>
+      <div class="retry-info" id="retry-info"></div>
       <div class="error-box" id="err-box"></div>
       <div id="usage-info"></div>
       <div id="mkt-ctx"></div>
@@ -235,18 +232,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-var LS_KEY='market_intel_v6';
-var LS_PREV='market_intel_prev_v6';
+var LS_KEY='market_intel_v7';
+var LS_PREV='market_intel_prev_v7';
 var LS_API='market_intel_key';
 var apiKey='';
 var lastData=null;
 var prevData=null;
-
-// ─── SISTEMA: instruccion estable, candidata a prompt caching ───
-var SYSTEM_PROMPT='Eres un analista financiero cuantitativo senior especializado en renta variable global con perfil de riesgo MAXIMO. Tu trabajo: generar recomendaciones semanales accionables para un cliente que acepta volatilidad extrema (small caps, biotech especulativo, semiconductores AI, crypto-adjacent, leverage plays).\n\nREGLAS ESTRICTAS:\n1. Solo usa tickers REALES cotizados en NYSE/NASDAQ/AMEX. Verifica con web_search si dudas.\n2. Prioriza acciones con catalizadores CONCRETOS y CON FECHA en los proximos 7 dias (earnings reports, decisiones FDA, reuniones Fed, lanzamientos, datos macro).\n3. Evita acciones meme sin fundamento, penny stocks bajo USD 1, y empresas en proceso de delisting.\n4. Scores 0-100: momentum_tecnico (precio vs MA50/MA200, RSI), fundamentos (revenue growth, margenes), catalizador_semana (proximidad e impacto del evento), sentimiento (analyst ratings, flujos).\n5. Stop loss debe ser proporcional al riesgo: ALTO 5-10%, MUY ALTO 10-15%, EXTREMO 15-25%.\n6. Rationale: 2-3 frases con datos concretos (revenue YoY, EPS estimate, precio actual).\n7. Para revision semana anterior: AUMENTAR solo si el catalizador se fortalecio, VENDER si ya se consumio o se invirtio, MANTENER si tesis original sigue intacta.\n8. Responde SIEMPRE solo con JSON valido. Nunca markdown, nunca texto adicional.\n9. Usa exactamente las claves cortas definidas en el esquema.';
-
-// ─── ESQUEMA: compacto, un ejemplo, replica para 5 ───
-var SCHEMA_TEMPLATE='{"cm":"<2 frases con SP500/Nasdaq/VIX numericos>","sg":"<ALCISTA|BAJISTA|MIXTO>","fd":"<fecha>","t5":[{"r":1,"tk":"<ticker NYSE/NASDAQ>","em":"<empresa>","sc":"<sector>","up":"<+X%>","cat":"<catalizador con fecha exacta>","rat":"<2-3 frases con datos>","mt":<0-100>,"mf":<0-100>,"mc":<0-100>,"ms":<0-100>,"ts":"<tag sector>","tc":"<tag catalizador>","ri":"<ALTO|MUY ALTO|EXTREMO>","sl":"<-X%>"}],"al":[{"nv":"<CRITICO|ADVERTENCIA|INFO>","ti":"<titulo>","de":"<descripcion>","im":"<impacto>","fe":"<fecha>"}],"rv":[{"tk":"<ticker>","em":"<empresa>","ac":"<MANTENER|AUMENTAR|VENDER>","rz":"<razon basada en contexto actual>","var":"<+X%>","conf":"<ALTA|MEDIA|BAJA>"}]}';
 
 window.addEventListener('DOMContentLoaded',function(){
   apiKey=localStorage.getItem(LS_API)||'';
@@ -299,6 +290,10 @@ function showErr(txt){
   var e=document.getElementById('err-box');
   e.textContent=txt?txt:'';e.className='error-box'+(txt?' active':'');
 }
+function showRetry(txt){
+  var e=document.getElementById('retry-info');
+  e.textContent=txt?txt:'';e.className='retry-info'+(txt?' active':'');
+}
 function showPdfBtn(){
   document.getElementById('informe-state').innerHTML='<div style="padding:4px 0 16px;"><button class="btn-pdf" id="pdf-btn" onclick="generarPDF()">&#128196; Descargar Informe PDF</button><div style="font-size:11px;color:var(--text2);text-align:center;line-height:1.7;">Incluye Top 5, Revision y Alertas<br>en formato dashboard profesional</div></div>';
 }
@@ -306,13 +301,18 @@ function showPdfBtn(){
 function fixJson(str){
   var start=str.indexOf('{');if(start<0)return null;
   str=str.slice(start);
-  var depth=0,adepth=0;
+  var depth=0,adepth=0,inStr=false,esc=false;
   for(var i=0;i<str.length;i++){
     var c=str[i];
+    if(esc){esc=false;continue;}
+    if(c==='\\'){esc=true;continue;}
+    if(c==='"'){inStr=!inStr;continue;}
+    if(inStr)continue;
     if(c==='{')depth++;else if(c==='}')depth--;
     else if(c==='[')adepth++;else if(c===']')adepth--;
   }
   str=str.replace(/[,\s]+$/,'');
+  if(inStr)str+='"';
   for(var x=0;x<adepth;x++)str+=']';
   for(var x=0;x<depth;x++)str+='}';
   str=str.replace(/,(\s*[}\]])/g,'$1');
@@ -323,54 +323,18 @@ function showUsage(usage){
   if(!usage)return;
   var inT=usage.input_tokens||0;
   var outT=usage.output_tokens||0;
-  var cachedR=usage.cache_read_input_tokens||0;
-  var cachedC=usage.cache_creation_input_tokens||0;
-  // Pricing sonnet 4.5: $3/MTok input, $15/MTok output, $0.30/MTok cached read, $3.75/MTok cache write
-  var cost=(inT*3+outT*15+cachedR*0.30+cachedC*3.75)/1000000;
-  var msg='Costo: USD '+cost.toFixed(4)+'  -  '+inT+' in / '+outT+' out';
-  if(cachedR>0)msg+=' / '+cachedR+' cache hit';
+  // Sonnet 4.5: $3/MTok input, $15/MTok output
+  var cost=(inT*3+outT*15)/1000000;
+  var msg='Costo: USD '+cost.toFixed(4)+'  -  '+inT+' tokens in / '+outT+' tokens out';
   document.getElementById('usage-info').innerHTML='<div class="usage-box">'+msg+'</div>';
 }
 
-async function runAnalysis(){
-  var btn=document.getElementById('analyze-btn');
-  var prog=document.getElementById('prog-track');
-  btn.disabled=true;prog.classList.add('active');
-  showErr('');setStatus('ANALIZANDO','loading');
-  document.getElementById('usage-info').innerHTML='';
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
 
-  var steps=['> conectando mercados...','> buscando datos actuales (max 3 fuentes)...','> analizando catalizadores con fecha...','> evaluando posiciones anteriores...','> generando JSON estructurado...'];
-  var si=0;setMsg(steps[0]);
-  var iv=setInterval(function(){if(si<steps.length-1)setMsg(steps[++si]);},1800);
-
-  var today=new Date().toLocaleDateString('es-CL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-
-  // Contexto de revision compacto (solo lo esencial)
-  var prevContext='';
-  if(lastData&&lastData.top5&&lastData.top5.length){
-    var prevList=lastData.top5.map(function(s){
-      return s.ticker+'('+s.upside_proyectado+',cat:'+truncate(s.catalizador_principal,40)+')';
-    }).join(', ');
-    prevContext='\n\nSEMANA ANTERIOR ('+(lastData.fecha_analisis||'')+'): '+prevList+'\nEvalua cada uno en "rv": MANTENER/AUMENTAR/VENDER segun contexto actual.';
-  }
-
-  // Prompt usuario: minimo, solo datos variables
-  var userPrompt='Fecha hoy: '+today+'.\n\nBusca web (max 3 fuentes) datos actuales: SP500/Nasdaq/VIX, earnings esta semana, eventos macro (Fed/CPI/NFP). Genera 5 acciones MAX RISK con catalizador esta semana.'+prevContext+'\n\nRESPONDE SOLO JSON con este esquema (5 elementos en t5, 2-3 en al, '+(lastData?'5':'0')+' en rv):\n'+SCHEMA_TEMPLATE;
-
+async function callAPI(body,attempt){
+  attempt=attempt||1;
+  var maxAttempts=3;
   try{
-    var body={
-      model:'claude-sonnet-4-6',
-      max_tokens:2500,
-      // System como bloque cacheable
-      system:[{
-        type:'text',
-        text:SYSTEM_PROMPT,
-        cache_control:{type:'ephemeral'}
-      }],
-      tools:[{type:'web_search_20250305',name:'web_search',max_uses:3}],
-      messages:[{role:'user',content:userPrompt}]
-    };
-
     var res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{
@@ -381,26 +345,97 @@ async function runAnalysis(){
       },
       body:JSON.stringify(body)
     });
-    clearInterval(iv);
-
-    if(!res.ok){
-      var txt=await res.text();
-      if(res.status===401)throw new Error('API Key invalida.');
-      if(res.status===429)throw new Error('Rate limit. Espera 2 min.');
-      throw new Error('Error API '+res.status);
+    if(res.ok)return await res.json();
+    var errText=await res.text();
+    console.error('API error '+res.status+':',errText);
+    // Retry para 429 (rate limit) y 529 (overloaded)
+    if((res.status===429||res.status===529)&&attempt<maxAttempts){
+      var waitSec=Math.pow(2,attempt)*5; // 10s, 20s, 40s
+      showRetry('Reintento '+attempt+'/'+(maxAttempts-1)+' en '+waitSec+'s...');
+      await sleep(waitSec*1000);
+      showRetry('');
+      return await callAPI(body,attempt+1);
     }
+    if(res.status===401)throw new Error('API Key invalida. Ve a configuracion y actualiza.');
+    if(res.status===400){
+      var parsed='';try{parsed=JSON.parse(errText).error.message||errText;}catch(e){parsed=errText;}
+      throw new Error('Error 400: '+parsed.slice(0,150));
+    }
+    if(res.status===429)throw new Error('Rate limit persistente. Espera 5 min y reintenta.');
+    if(res.status===529)throw new Error('API sobrecargada. Reintenta en unos minutos.');
+    throw new Error('Error API '+res.status+': '+errText.slice(0,100));
+  }catch(e){
+    if(e.message.indexOf('Error')===0||e.message.indexOf('API Key')===0||e.message.indexOf('Rate limit')===0)throw e;
+    if(attempt<maxAttempts){
+      var waitSec=5*attempt;
+      showRetry('Reintento '+attempt+'/'+(maxAttempts-1)+' en '+waitSec+'s (error red)...');
+      await sleep(waitSec*1000);
+      showRetry('');
+      return await callAPI(body,attempt+1);
+    }
+    throw new Error('Error de conexion: '+e.message);
+  }
+}
 
-    var data=await res.json();
+async function runAnalysis(){
+  var btn=document.getElementById('analyze-btn');
+  var prog=document.getElementById('prog-track');
+  btn.disabled=true;prog.classList.add('active');
+  showErr('');showRetry('');setStatus('ANALIZANDO','loading');
+  document.getElementById('usage-info').innerHTML='';
+
+  var steps=['> conectando mercados...','> buscando datos actuales...','> analizando catalizadores...','> evaluando posiciones anteriores...','> generando JSON estructurado...'];
+  var si=0;setMsg(steps[0]);
+  var iv=setInterval(function(){if(si<steps.length-1)setMsg(steps[++si]);},2000);
+
+  var today=new Date().toLocaleDateString('es-CL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var todayShort=new Date().toISOString().slice(0,10);
+
+  // ─── PROMPT UNIFICADO (sin caching, sin schema con placeholders) ───
+  var prevContext='';
+  var includeRevision=false;
+  if(lastData&&lastData.top5&&lastData.top5.length){
+    includeRevision=true;
+    var prevList=lastData.top5.map(function(s){
+      return s.ticker+' (recomendada con upside '+s.upside_proyectado+', catalizador: '+truncate(s.catalizador_principal,60)+')';
+    }).join('\n  - ');
+    prevContext='\n\nACCIONES RECOMENDADAS LA SEMANA ANTERIOR ('+(lastData.fecha_analisis||'')+'):\n  - '+prevList+'\n\nDebes evaluar cada una en el campo "rv" (revision) con accion MANTENER, AUMENTAR o VENDER segun contexto actual del mercado.';
+  }
+
+  // EJEMPLO CONCRETO (no placeholders) que el modelo debe REPLICAR con datos reales
+  var ejemplo='{"cm":"El S&P 500 cerro en 5847 (+0.8% semana), Nasdaq en 18972 (+1.2%), VIX en 14.2. Datos macro favorables con CPI 2.4% YoY.","sg":"ALCISTA","fd":"'+today+'","t5":[{"r":1,"tk":"NVDA","em":"NVIDIA Corporation","sc":"Semiconductores AI","up":"+12%","cat":"Earnings Q4 miercoles 15 enero post-cierre","rat":"Consenso espera EPS 0.84 vs 0.49 YoY. Demanda Blackwell H200 excede capacidad. Margenes brutos sobre 75%.","mt":92,"mf":85,"mc":98,"ms":90,"ts":"Semis","tc":"Earnings","ri":"MUY ALTO","sl":"-10%"},{"r":2,"tk":"COIN","em":"Coinbase Global","sc":"Crypto Exchange","up":"+18%","cat":"BTC sobre 100K + ETF flows record esta semana","rat":"Volumen trading 3x YoY. Spot ETF approvals impulsan ingresos. Beta 3.5 vs SP500.","mt":88,"mf":72,"mc":85,"ms":80,"ts":"Crypto","tc":"Macro","ri":"EXTREMO","sl":"-18%"},{"r":3,"tk":"MRNA","em":"Moderna Inc","sc":"Biotech","up":"+22%","cat":"Resultados Fase 3 vacuna oncologica viernes","rat":"Pipeline mRNA-4157 con datos preliminares positivos. Short interest 18% potencial squeeze.","mt":75,"mf":60,"mc":95,"ms":68,"ts":"Biotech","tc":"FDA","ri":"EXTREMO","sl":"-20%"},{"r":4,"tk":"AMD","em":"Advanced Micro Devices","sc":"Semis","up":"+10%","cat":"Lanzamiento MI325X jueves a clientes Tier 1","rat":"Hyperscalers Microsoft Meta Google confirmados. Cuota AI accelerators sube de 5% a 12%.","mt":80,"mf":78,"mc":82,"ms":75,"ts":"Semis","tc":"Producto","ri":"MUY ALTO","sl":"-12%"},{"r":5,"tk":"PLTR","em":"Palantir Technologies","sc":"Software AI","up":"+15%","cat":"Contrato Pentagono USD 480M anuncio inminente","rat":"AIP enterprise crece 54% YoY. Margenes operativos 38%. Multiples premium justificados.","mt":85,"mf":80,"mc":78,"ms":88,"ts":"AI","tc":"Contratos","ri":"MUY ALTO","sl":"-12%"}],"al":[{"nv":"CRITICO","ti":"FOMC Meeting miercoles 15:00 ET","de":"Powell decision sobre tasas con probabilidad 65% de pausa segun CME FedWatch.","im":"Movimiento brusco growth stocks y tech. VIX puede escalar 30%+.","fe":"Miercoles"},{"nv":"ADVERTENCIA","ti":"CPI viernes 8:30 ET","de":"Consenso 2.4% headline 3.1% core. Sorpresa al alza dañaria valuaciones.","im":"Rotacion growth a value. Yields 10Y potencial breakout.","fe":"Viernes"},{"nv":"INFO","ti":"OPEC+ decision produccion","de":"Reunion lunes podria afectar petroleo y energy stocks.","im":"Sector energy XLE volatilidad esperada.","fe":"Lunes"}],"rv":[]}';
+
+  var prompt='Eres un analista financiero cuantitativo senior con perfil de riesgo MAXIMO. Generas recomendaciones semanales para un cliente que acepta volatilidad extrema (small caps, biotech, semiconductores AI, crypto-adjacent, leverage plays).\n\nFECHA HOY: '+today+' ('+todayShort+')\n\nINSTRUCCIONES:\n1. Busca informacion ACTUAL en internet sobre: indices SP500/Nasdaq/VIX esta semana, earnings que reportan estos 7 dias, eventos macro Fed/CPI/NFP, catalizadores sectoriales.\n2. Selecciona 5 acciones REALES cotizadas en NYSE/NASDAQ con catalizadores CONCRETOS los proximos 7 dias.\n3. Evita penny stocks bajo USD 1, empresas en delisting, meme stocks sin fundamento.\n4. Scores 0-100: momentum_tecnico (precio vs MA50/MA200, RSI), fundamentos (revenue growth, margenes), catalizador_semana (proximidad/impacto), sentimiento (analyst ratings).\n5. Stop loss proporcional: ALTO 5-10%, MUY ALTO 10-15%, EXTREMO 15-25%.\n6. Rationale con DATOS concretos (revenue YoY, EPS estimate, precio aproximado).'+prevContext+'\n\nFORMATO DE RESPUESTA:\nResponde SOLO con un JSON valido siguiendo EXACTAMENTE este formato de ejemplo, reemplazando los valores por datos REALES actuales. Sin markdown, sin backticks, sin texto adicional antes o despues. Solo el JSON.\n\nEJEMPLO DE FORMATO (no copies estos datos, son ilustrativos):\n'+ejemplo+'\n\nIMPORTANTE: '+(includeRevision?'Incluye 5 elementos en "rv" evaluando cada accion de la semana anterior.':'Deja "rv" como array vacio [] (es la primera semana).')+'\n\nGenera el JSON ahora con datos reales actuales:';
+
+  try{
+    var body={
+      model:'claude-sonnet-4-6',
+      max_tokens:3000,
+      tools:[{type:'web_search_20250305',name:'web_search'}],
+      messages:[{role:'user',content:prompt}]
+    };
+
+    var data=await callAPI(body);
+    clearInterval(iv);
     showUsage(data.usage);
 
     var raw=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+    console.log('Respuesta raw:',raw.slice(0,500));
     raw=raw.replace(/```json|```/g,'').trim();
-    var fixed=fixJson(raw);
-    if(!fixed)throw new Error('Sin respuesta. Reintenta.');
 
-    var d;try{d=JSON.parse(fixed);}catch(pe){throw new Error('JSON malformado. Reintenta.');}
+    var fixed=fixJson(raw);
+    if(!fixed)throw new Error('Sin JSON en respuesta. Ver consola.');
+
+    var d;
+    try{d=JSON.parse(fixed);}
+    catch(pe){
+      console.error('JSON parse error:',pe);
+      console.error('Texto a parsear:',fixed.slice(0,500));
+      throw new Error('JSON malformado: '+pe.message.slice(0,80));
+    }
+
     var norm=normalizeData(d);
-    if(!norm.top5||!norm.top5.length)throw new Error('Datos incompletos. Reintenta.');
+    if(!norm.top5||!norm.top5.length)throw new Error('Sin datos de acciones en respuesta. Reintenta.');
 
     if(lastData){
       var prevToSave={fecha:lastData.fecha_analisis||today,top5:lastData.top5};
@@ -420,10 +455,13 @@ async function runAnalysis(){
     document.getElementById('footer-txt').textContent='Actualizado '+now.toLocaleDateString('es-CL')+' - '+now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
 
   }catch(e){
-    clearInterval(iv);setStatus('ERROR','error');showErr(e.message);
+    clearInterval(iv);
+    setStatus('ERROR','error');
+    showErr(e.message);
+    console.error('Error completo:',e);
   }finally{
     btn.disabled=false;prog.classList.remove('active');
-    setTimeout(function(){setMsg('');},3000);
+    setTimeout(function(){setMsg('');showRetry('');},3000);
   }
 }
 
@@ -435,12 +473,18 @@ function normalizeData(d){
   out.sentimiento_general=d.sentimiento_general||d.sg||'MIXTO';
   out.fecha_analisis=d.fecha_analisis||d.fd||new Date().toLocaleDateString('es-CL');
   var raw5=d.top5||d.t5||[];
-  out.top5=raw5.map(function(s){return{rank:s.rank||s.r||1,ticker:s.ticker||s.tk||'',empresa:s.empresa||s.em||'',sector:s.sector||s.sc||'',upside_proyectado:s.upside_proyectado||s.up||'+?%',catalizador_principal:s.catalizador_principal||s.cat||'',rationale:s.rationale||s.rat||'',scores:{momentum_tecnico:s.scores?s.scores.momentum_tecnico:(s.mt||70),fundamentos:s.scores?s.scores.fundamentos:(s.mf||65),catalizador_semana:s.scores?s.scores.catalizador_semana:(s.mc||75),sentimiento:s.scores?s.scores.sentimiento:(s.ms||70)},tag_sector:s.tag_sector||s.ts||s.sector||'',tag_catalyst:s.tag_catalyst||s.tc||'',riesgo:s.riesgo||s.ri||'ALTO',stop_loss_sugerido:s.stop_loss_sugerido||s.sl||'N/A'};});
+  out.top5=raw5.map(function(s){return{rank:s.rank||s.r||1,ticker:s.ticker||s.tk||'',empresa:s.empresa||s.em||'',sector:s.sector||s.sc||'',upside_proyectado:s.upside_proyectado||s.up||'+?%',catalizador_principal:s.catalizador_principal||s.cat||'',rationale:s.rationale||s.rat||'',scores:{momentum_tecnico:safeNum(s.scores?s.scores.momentum_tecnico:s.mt),fundamentos:safeNum(s.scores?s.scores.fundamentos:s.mf),catalizador_semana:safeNum(s.scores?s.scores.catalizador_semana:s.mc),sentimiento:safeNum(s.scores?s.scores.sentimiento:s.ms)},tag_sector:s.tag_sector||s.ts||s.sector||'',tag_catalyst:s.tag_catalyst||s.tc||'',riesgo:s.riesgo||s.ri||'ALTO',stop_loss_sugerido:s.stop_loss_sugerido||s.sl||'N/A'};});
   var rawAl=d.alertas||d.al||[];
   out.alertas=rawAl.map(function(a){return{nivel:a.nivel||a.nv||'INFO',titulo:a.titulo||a.ti||'',descripcion:a.descripcion||a.de||'',impacto:a.impacto||a.im||'',fecha_evento:a.fecha_evento||a.fe||'Esta semana'};});
   var rawRv=d.revision||d.rv||[];
   out.revision=rawRv.map(function(r){return{ticker:r.ticker||r.tk||'',empresa:r.empresa||r.em||'',accion:r.accion||r.ac||'MANTENER',razon:r.razon||r.rz||'',variacion:r.variacion||r.var||'N/A',confianza:r.confianza||r.conf||'MEDIA'};});
   return out;
+}
+
+function safeNum(v){
+  if(typeof v==='number')return Math.max(0,Math.min(100,Math.round(v)));
+  if(typeof v==='string'){var n=parseInt(v,10);if(!isNaN(n))return Math.max(0,Math.min(100,n));}
+  return 70;
 }
 
 function renderAll(d){renderAnalysis(d);renderAlerts(d.alertas||[]);}
